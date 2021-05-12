@@ -71,7 +71,6 @@ export class RegisterFormComponent implements OnInit {
         break;
       default:
         this.errorMessage = "An unexpected error occurred."
-        break;
     }
     this.hasError = true;
   }

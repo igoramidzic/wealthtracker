@@ -32,7 +32,6 @@ export class UserService implements IUser {
         .subscribe(user => {
           this.user$.next(user);
           this.user = user;
-          console.log(this.user)
           resolve(user);
         }, err => {
           reject(err)

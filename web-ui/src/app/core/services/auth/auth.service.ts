@@ -99,7 +99,6 @@ export class AuthService {
 
     try {
       let signInResult = await Auth.signIn(email, password);
-      console.log(signInResult)
       this.setNextStep(AuthNextStep.None);
 
       return signInResult;

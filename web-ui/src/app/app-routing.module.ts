@@ -21,17 +21,23 @@ const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AuthGuard, UserGuard],
+    canActivate: [AuthGuard],
     children: [
       {
-        path: PAGE_ROUTES_CONSTANTS.DASHBOARD,
-        canActivate: [OnboardingCompleteGuard],
-        loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: PAGE_ROUTES_CONSTANTS.ONBOARDING,
-        canActivate: [OnboardingIncompleteGuard],
-        loadChildren: () => import('./features/onboarding/onboarding.module').then(m => m.OnboardingModule)
+        path: '',
+        canActivate: [UserGuard],
+        children: [
+          {
+            path: PAGE_ROUTES_CONSTANTS.DASHBOARD,
+            canActivate: [OnboardingCompleteGuard],
+            loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
+          },
+          {
+            path: PAGE_ROUTES_CONSTANTS.ONBOARDING,
+            canActivate: [OnboardingIncompleteGuard],
+            loadChildren: () => import('./features/onboarding/onboarding.module').then(m => m.OnboardingModule)
+          }
+        ]
       }
     ]
   }
