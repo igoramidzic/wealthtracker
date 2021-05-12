@@ -1,6 +1,6 @@
 {
   "auth": {
-    "wealthtrackerd957132f": {
+    "wealthtracker2132454c": {
       "service": "Cognito",
       "serviceType": "imported",
       "providerPlugin": "awscloudformation",
