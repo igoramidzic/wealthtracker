@@ -1,0 +1,9 @@
+<div class="d-flex">
+    <button class="icon-btn btn-lg btn-outline mr-3" *ngIf="onboardingO.currentQuestion != 1" [disabled]="onboardingO.saving" (click)="onBack()">
+        <img src="assets/icons/left-arrow.svg" alt="">
+    </button>
+    <button type="submit" class="btn btn-lg btn-primary btn-width-lg" *ngIf="onboardingO.questionCount - onboardingO.currentQuestion > 0" (click)="onNext()" [disabled]="!onboardingO.canGoNext">Next</button>
+    <button type="submit" class="btn btn-lg btn-primary btn-width-lg" *ngIf="onboardingO.questionCount - onboardingO.currentQuestion == 0" [disabled]="!onboardingO.canComplete || onboardingO.saving" (click)="onComplete()">
+        Complete
+    </button>
+</div>

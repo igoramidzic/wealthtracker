@@ -1,0 +1,15 @@
+<form class="p-d-flex p-flex-column p-ai-stretch" [formGroup]="loginForm" (submit)="onLogIn()">
+    <div class="p-field p-mb-3 p-d-flex p-flex-column p-ai-stretch">
+        <label for="email">Email</label>
+        <input class="p-inputtext p-inputtext-lg" id="email" name="email" type="email" formControlName="email">
+    </div>
+
+    <div class="p-field p-mb-4 p-d-flex p-flex-column p-ai-stretch">
+        <label for="password">Password</label>
+        <input class="p-inputtext p-inputtext-lg" id="password" name="password" type="password" formControlName="password">
+    </div>
+
+    <p-message class="p-mb-4" severity="error" [text]="errorMessage" *ngIf="hasError"></p-message>
+
+    <button pButton type="submit" class="p-button-primary p-d-block p-button-lg" [disabled]="disableButton">Login</button>
+</form>

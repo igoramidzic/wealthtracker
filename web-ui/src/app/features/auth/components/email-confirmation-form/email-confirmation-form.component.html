@@ -1,0 +1,27 @@
+<form class="p-d-flex p-flex-column p-ai-stretch" [formGroup]="emailConfirmationForm" (submit)="onConfirmEmail()">
+    <div class="p-field p-mb-4 p-d-flex p-flex-column p-ai-stretch">
+        <label for="confirmEmailCode">Confirmation Code</label>
+        <input class="p-inputtext p-inputtext-lg" type="password" name="confirmEmailCode" id="confirmEmailCode" formControlName="code" placeholder="123456" autocomplete="false" maxLength="6">
+    </div>
+
+    <p-message class="p-mb-4" severity="error" [text]="errorMessage" *ngIf="hasError"></p-message>
+
+    <button pButton type="submit" class="p-button-primary p-d-block p-button-lg" [disabled]="disableButton">Confirm Email</button>
+</form>
+
+<div class="p-d-flex p-flex-column p-ai-center p-mt-3">
+    <ng-container *ngIf="!sendCodeLimitReached; else limitReached">
+        <button pButton class="p-button-secondary p-button-text p-button-sm" [disabled]="disableResendButton" (click)="onResendCode()">
+            <ng-container *ngIf="resendCounterSeconds == 0; else elseTemplate">
+                Resend Code
+            </ng-container>
+            <ng-template #elseTemplate>
+                Resend again in: {{ resendCounterSeconds}} seconds
+            </ng-template>
+        </button>
+    </ng-container>
+    <ng-template #limitReached>
+        <p-message severity="error" text="Resend limit reached"></p-message>
+    </ng-template>
+
+</div>

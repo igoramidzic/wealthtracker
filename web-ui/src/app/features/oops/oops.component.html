@@ -1,0 +1,17 @@
+<div class="p-d-flex p-jc-center p-ai-center" style="height: 100%">
+    <div class="p-d-flex d-flex-column p-jc-center">
+        <div class="wrapper">
+            <h4>Something went wrong.</h4>
+            <div class="p-mb-4">
+                <p-message severity="error" [text]="oopsService.whatWentWrong"></p-message>
+            </div>
+
+            <div class="p-d-flex p-flex-column p-ai-center">
+                <a pButton class="p-button-primary p-d-block p-mb-4" [routerLink]="['']">Return to Dashboard</a>
+
+                <button pButton class="p-button-secondary p-button-sm" (click)="authService.signOut()">Logout</button>
+            </div>
+
+        </div>
+    </div>
+</div>

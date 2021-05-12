@@ -1,0 +1,8 @@
+<p class="text-center mb-5">What is your expected investment yield?</p>
+
+<div class="wrapper mx-auto d-flex flex-column align-items-center">
+    <div class="d-flex align-items-center flex-fill">
+        <input class="input-lg align-right" type="text" name="expected-investment-yield" [ngModel]="onboardingO.expectedInvestmentYield" (ngModelChange)="onChange($event)" step="1">
+        <h2 class="ml-3 mb-0">%</h2>
+    </div>
+</div>

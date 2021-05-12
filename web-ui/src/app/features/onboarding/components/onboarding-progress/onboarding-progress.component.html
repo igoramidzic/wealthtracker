@@ -1,0 +1,5 @@
+<app-progress-bar class="d-block mb-2" [percentage]="onboardingO.percentageCompleted"></app-progress-bar>
+<div class="d-flex align-items-center justify-content-between">
+    <span class="hint">STEP {{ onboardingO.currentQuestion }} OUT OF {{ onboardingO.questionCount }}</span>
+    <span class="hint">{{ onboardingO.percentageCompleted }}%</span>
+</div>

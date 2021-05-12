@@ -1,0 +1,5 @@
+<p class="text-center mb-5">What is your retirement age?</p>
+
+<div class="wrapper mx-auto d-flex flex-column align-items-center">
+    <ngx-slider [value]="onboardingO.retirementAge" (valueChange)="onChange($event)" [options]="sliderOptions"></ngx-slider>
+</div>

@@ -1,0 +1,12 @@
+<h1 class="text-center mb-4 h1-responsive">Question {{ onboardingO.currentQuestion }}</h1>
+<div [ngSwitch]="onboardingO.currentQuestion">
+    <div *ngSwitchCase="EOnboardingQuestion.CurrentAge">
+        <app-onboarding-current-age-question [onboardingO]="onboardingO"></app-onboarding-current-age-question>
+    </div>
+    <div *ngSwitchCase="EOnboardingQuestion.RetirementAge">
+        <app-onboarding-retirement-age-question [onboardingO]="onboardingO"></app-onboarding-retirement-age-question>
+    </div>
+    <div *ngSwitchCase="EOnboardingQuestion.ExpectedInvestmentYield">
+        <app-onboarding-expected-investment-yield-question [onboardingO]="onboardingO"></app-onboarding-expected-investment-yield-question>
+    </div>
+</div>

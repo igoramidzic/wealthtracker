@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "wealthtrackerd957132f": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

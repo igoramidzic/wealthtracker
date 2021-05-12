@@ -1,0 +1,11 @@
+<div class="d-flex align-items-center justify-content-center h-100">
+    <div class="d-flex flex-column align-items-center w-100">
+        <app-onboarding-complete-message *ngIf="onboardingO.completed" class="d-block mb-5"></app-onboarding-complete-message>
+        <app-onboarding-saving *ngIf="onboardingO.saving" class="d-block mb-5"></app-onboarding-saving>
+        <app-onboarding-question-chooser *ngIf="!onboardingO.saving && !onboardingO.completed" [onboardingO]="onboardingO" class="d-block mb-5 w-100"></app-onboarding-question-chooser>
+        <app-onboarding-navigation-buttons *ngIf="onboardingO.answeringQuestions" class="d-block mb-5" [onboardingO]="onboardingO"></app-onboarding-navigation-buttons>
+        <div style="max-width: 400px; width: 100%">
+            <app-onboarding-progress [onboardingO]="onboardingO"></app-onboarding-progress>
+        </div>
+    </div>
+</div>
