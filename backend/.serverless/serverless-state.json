@@ -104,6 +104,12 @@
               "LogGroupName": "/aws/lambda/wealthtracker-dev-createUserOnSignUp"
             }
           },
+          "CompleteOnboardingLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/wealthtracker-dev-completeOnboarding"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -188,7 +194,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/wealthtracker/dev/1620772298189-2021-05-11T22:31:38.189Z/wealthtracker.zip"
+                "S3Key": "serverless/wealthtracker/dev/1620863025120-2021-05-12T23:43:45.120Z/wealthtracker.zip"
               },
               "Handler": "src/functions/user/getUser/handler.main",
               "Runtime": "nodejs14.x",
@@ -220,7 +226,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/wealthtracker/dev/1620772298189-2021-05-11T22:31:38.189Z/wealthtracker.zip"
+                "S3Key": "serverless/wealthtracker/dev/1620863025120-2021-05-12T23:43:45.120Z/wealthtracker.zip"
               },
               "Handler": "src/functions/user/createUserOnSignUp/handler.main",
               "Runtime": "nodejs14.x",
@@ -245,24 +251,66 @@
               "CreateUserOnSignUpLogGroup"
             ]
           },
-          "GetUserLambdaVersionGYeW8CqaUjtgyvQL89TuicuEoJXQ3hs5JYNyn8LdE4": {
+          "CompleteOnboardingLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/wealthtracker/dev/1620863025120-2021-05-12T23:43:45.120Z/wealthtracker.zip"
+              },
+              "Handler": "src/functions/onboarding/completeOnboarding/handler.main",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "wealthtracker-dev-completeOnboarding",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+                  "DYNAMODB_USER_TABLE": "wealthtracker-user-dev",
+                  "DYNAMODB_USER_TABLE_REGION": "us-east-2"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "CompleteOnboardingLogGroup"
+            ]
+          },
+          "GetUserLambdaVersionVfuv4CCLG5D2RAtdCiH2K4AD5SSXojRsspa6VmLsIM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetUserLambdaFunction"
               },
-              "CodeSha256": "CPsNKe+uofbhE2S/xsVnsBkCNEJwHKxL/fn0845k4Kk="
+              "CodeSha256": "qWQZEpr3bsunWX9W3YS0XGM/5ctOugcP/kHgoocRDVU="
             }
           },
-          "CreateUserOnSignUpLambdaVersionSWi3bXIO5zpkUizvXovk8snQYSmbeCXY12TNsngLbrI": {
+          "CreateUserOnSignUpLambdaVersionHtzVlCKQ2H65ATYk5FDD4MUTIbHDDdkxes3rtEWDOcM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateUserOnSignUpLambdaFunction"
               },
-              "CodeSha256": "CPsNKe+uofbhE2S/xsVnsBkCNEJwHKxL/fn0845k4Kk="
+              "CodeSha256": "qWQZEpr3bsunWX9W3YS0XGM/5ctOugcP/kHgoocRDVU="
+            }
+          },
+          "CompleteOnboardingLambdaVersionE6hK9LwRhVcOlUyGOP1ZYXKvmZJ1XJQNNbWv8nGgXM": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CompleteOnboardingLambdaFunction"
+              },
+              "CodeSha256": "qWQZEpr3bsunWX9W3YS0XGM/5ctOugcP/kHgoocRDVU="
             }
           },
           "ApiGatewayRestApi": {
@@ -288,6 +336,33 @@
                 ]
               },
               "PathPart": "user",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceOnboarding": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "onboarding",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceOnboardingComplete": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceOnboarding"
+              },
+              "PathPart": "complete",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -332,6 +407,51 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceUser"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodOnboardingCompleteOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceOnboardingComplete"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -384,7 +504,53 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1620772289873": {
+          "ApiGatewayMethodOnboardingCompletePost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceOnboardingComplete"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "COGNITO_USER_POOLS",
+              "AuthorizerId": {
+                "Ref": "userPoolAuthorizer"
+              },
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "CompleteOnboardingLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayDeployment1620863015444": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -394,7 +560,9 @@
             },
             "DependsOn": [
               "ApiGatewayMethodUserOptions",
-              "ApiGatewayMethodUserGet"
+              "ApiGatewayMethodOnboardingCompleteOptions",
+              "ApiGatewayMethodUserGet",
+              "ApiGatewayMethodOnboardingCompletePost"
             ]
           },
           "GetUserLambdaPermissionApiGateway": {
@@ -403,6 +571,43 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "GetUserLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "CompleteOnboardingLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CompleteOnboardingLambdaFunction",
                   "Arn"
                 ]
               },
@@ -724,7 +929,7 @@
           "GetUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetUserLambdaVersionGYeW8CqaUjtgyvQL89TuicuEoJXQ3hs5JYNyn8LdE4"
+              "Ref": "GetUserLambdaVersionVfuv4CCLG5D2RAtdCiH2K4AD5SSXojRsspa6VmLsIM"
             },
             "Export": {
               "Name": "sls-wealthtracker-dev-GetUserLambdaFunctionQualifiedArn"
@@ -733,10 +938,19 @@
           "CreateUserOnSignUpLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateUserOnSignUpLambdaVersionSWi3bXIO5zpkUizvXovk8snQYSmbeCXY12TNsngLbrI"
+              "Ref": "CreateUserOnSignUpLambdaVersionHtzVlCKQ2H65ATYk5FDD4MUTIbHDDdkxes3rtEWDOcM"
             },
             "Export": {
               "Name": "sls-wealthtracker-dev-CreateUserOnSignUpLambdaFunctionQualifiedArn"
+            }
+          },
+          "CompleteOnboardingLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CompleteOnboardingLambdaVersionE6hK9LwRhVcOlUyGOP1ZYXKvmZJ1XJQNNbWv8nGgXM"
+            },
+            "Export": {
+              "Name": "sls-wealthtracker-dev-CompleteOnboardingLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -915,7 +1129,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetUserLambdaVersionGYeW8CqaUjtgyvQL89TuicuEoJXQ3hs5JYNyn8LdE4"
+        "versionLogicalId": "GetUserLambdaVersionVfuv4CCLG5D2RAtdCiH2K4AD5SSXojRsspa6VmLsIM"
       },
       "createUserOnSignUp": {
         "handler": "src/functions/user/createUserOnSignUp/handler.main",
@@ -939,7 +1153,61 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "CreateUserOnSignUpLambdaVersionSWi3bXIO5zpkUizvXovk8snQYSmbeCXY12TNsngLbrI"
+        "versionLogicalId": "CreateUserOnSignUpLambdaVersionHtzVlCKQ2H65ATYk5FDD4MUTIbHDDdkxes3rtEWDOcM"
+      },
+      "completeOnboarding": {
+        "handler": "src/functions/onboarding/completeOnboarding/handler.main",
+        "events": [
+          {
+            "http": {
+              "method": "post",
+              "path": "onboarding/complete",
+              "authorizer": {
+                "type": "COGNITO_USER_POOLS",
+                "managedExternally": false,
+                "authorizerId": {
+                  "Ref": "userPoolAuthorizer"
+                },
+                "resultTtlInSeconds": 300,
+                "identitySource": "method.request.header.Authorization",
+                "claims": []
+              },
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "environment": {
+          "DYNAMODB_USER_TABLE": "wealthtracker-user-dev",
+          "DYNAMODB_USER_TABLE_REGION": "us-east-2"
+        },
+        "name": "wealthtracker-dev-completeOnboarding",
+        "package": {
+          "artifact": ".serverless/wealthtracker.zip"
+        },
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "CompleteOnboardingLambdaVersionE6hK9LwRhVcOlUyGOP1ZYXKvmZJ1XJQNNbWv8nGgXM"
       }
     },
     "resources": {
@@ -1223,7 +1491,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/wealthtracker/dev/1620772298189-2021-05-11T22:31:38.189Z",
+    "artifactDirectoryName": "serverless/wealthtracker/dev/1620863025120-2021-05-12T23:43:45.120Z",
     "artifact": ""
   }
 }

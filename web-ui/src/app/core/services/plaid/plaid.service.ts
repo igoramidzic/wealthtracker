@@ -1,22 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { EnvironmentService } from '../environment/environment.service';
 import { BehaviorSubject } from 'rxjs';
-import { exchangePublicToken } from '../../../../../../server/api/handlers/plaid.handler';
 import {
-  NgxPlaidLinkService,
-  PlaidAccountObject,
-  PlaidConfig,
   PlaidErrorMetadata,
   PlaidErrorObject,
   PlaidEventMetadata,
-  PlaidLinkHandler,
   PlaidOnEventArgs,
   PlaidOnExitArgs,
   PlaidOnSuccessArgs,
-  PlaidSuccessMetadata
-} from 'ngx-plaid-link';
+  PlaidSuccessMetadata,
+  PlaidConfig,
+  NgxPlaidLinkService,
+  PlaidLinkHandler
+} from "ngx-plaid-link";
 import { AccountsResponse } from 'plaid';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +30,7 @@ export class PlaidService {
   event: EventEmitter<PlaidOnEventArgs>
   exit: EventEmitter<PlaidOnExitArgs>
 
-  constructor(private http: HttpClient, private env: EnvironmentService,
+  constructor(private http: HttpClient,
     private plaidLinkService: NgxPlaidLinkService) {
 
     this.success = new EventEmitter();
@@ -42,16 +40,16 @@ export class PlaidService {
     this.plaidLinkServiceAvailable$ = new BehaviorSubject(false);
 
     this.config = {
-      apiVersion: this.env.plaid.apiVersion,
-      clientName: this.env.plaid.clientName,
-      env: this.env.plaid.environment,
+      apiVersion: environment.plaid.apiVersion,
+      clientName: environment.plaid.clientName,
+      env: environment.plaid.environment,
       onLoad: () => { },
       onSuccess: (token: string, metadata: PlaidSuccessMetadata) => this.onSuccess(token, metadata),
       onExit: (error: PlaidErrorObject, metadata: PlaidErrorMetadata) => this.onExit(error, metadata),
       onEvent: (eventName: string, metadata: PlaidEventMetadata) => this.onEvent(eventName, metadata),
-      product: this.env.plaid.products,
+      product: environment.plaid.products,
       selectAccount: false,
-      countryCodes: this.env.plaid.countryCodes
+      countryCodes: environment.plaid.countryCodes
     };
 
     this.createLinkToken();
@@ -59,7 +57,8 @@ export class PlaidService {
 
   createLinkToken(): Promise<string> {
     return new Promise((resolve, reject) => {
-      this.http.get(this.env.apiUrl + '/plaid/link/token/create').toPromise()
+      console.log(environment.wealthtracker_api_url)
+      this.http.get(environment.wealthtracker_api_url + '/plaid/link/token').toPromise()
         .then((res: { link_token: string }) => {
           this.setLinkToken(res.link_token);
           this.createPlaidLinkHandler();
@@ -77,12 +76,12 @@ export class PlaidService {
   }
 
   getAccounts(): Promise<AccountsResponse> {
-    return this.http.get<AccountsResponse>(this.env.apiUrl + '/plaid/accounts/get').toPromise();
+    return this.http.get<AccountsResponse>(environment.wealthtracker_api_url + '/plaid/accounts/get').toPromise();
   }
 
   private exchangePublicToken(public_token: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.http.post(this.env.apiUrl + '/plaid/item/public_token/exchange', {
+      this.http.post(environment.wealthtracker_api_url + '/plaid/item/public_token/exchange', {
         public_token
       }).toPromise()
         .then((res: any) => {
@@ -103,15 +102,18 @@ export class PlaidService {
   }
 
   private onSuccess(token: string, metadata: PlaidSuccessMetadata) {
-    this.exchangePublicToken(token)
+    // this.exchangePublicToken(token)
+    console.log(token, metadata)
     this.success.emit({ token, metadata });
   }
 
   private onEvent(eventName: string, metadata: PlaidEventMetadata) {
+    console.log(eventName, metadata)
     this.event.emit({ eventName, metadata });
   }
 
   private onExit(error: PlaidErrorObject, metadata: PlaidErrorMetadata) {
+    console.log(error, metadata)
     this.exit.emit({ error, metadata });
   }
 

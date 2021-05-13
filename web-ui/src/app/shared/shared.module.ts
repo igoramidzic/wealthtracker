@@ -24,7 +24,7 @@ import { DividerModule } from 'primeng/divider';
     InputTextModule,
     MessagesModule,
     MessageModule,
-    DividerModule,
+    DividerModule
   ],
   declarations: [
     MainNavbarComponent,
@@ -42,7 +42,7 @@ import { DividerModule } from 'primeng/divider';
     InputTextModule,
     MessagesModule,
     MessageModule,
-    DividerModule,
+    DividerModule
   ],
 })
 export class SharedModule { }

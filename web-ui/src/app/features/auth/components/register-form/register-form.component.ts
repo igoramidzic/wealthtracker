@@ -26,6 +26,8 @@ export class RegisterFormComponent implements OnInit {
     this.errorMessage = "";
     this.hasError = false;
     this.isLoading = false;
+
+
     this.registerForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),

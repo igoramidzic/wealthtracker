@@ -9,11 +9,11 @@ export const environment: IEnvironment = {
   wealthtracker_api_url: 'https://tw71jcqt3g.execute-api.us-east-2.amazonaws.com/dev',
   plaid: {
     client_id: "5e24db63dad2b80015cc8eec",
-    environment: "development",
+    environment: "sandbox",
     apiVersion: "v2",
     clientName: "",
     countryCodes: ["US"],
-    products: ['auth', 'transactions']
+    products: ['auth', 'transactions', 'investments']
   }
 };
 

@@ -13,6 +13,7 @@
     "@middy/core": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
     "aws-sdk": "^2.892.0",
+    "plaid": "^8.4.0",
     "serverless": "^2.40.0",
     "source-map-support": "^0.5.19"
   },

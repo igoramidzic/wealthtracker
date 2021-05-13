@@ -6,6 +6,7 @@ import { middyfy } from '@libs/lambda';
 import * as aws from 'aws-sdk';
 
 import schema from './schema';
+import { IOnboarding } from 'src/models/user';
 
 const completeOnboarding: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event, context) => {
   const tableName = process.env.DYNAMODB_USER_TABLE;
@@ -19,24 +20,28 @@ const completeOnboarding: ValidatedEventAPIGatewayProxyEvent<typeof schema> = as
     return formatJSONResponse(401, null);
   }
 
+  let onboardingObj: IOnboarding = mapBodyToOnboarding(event.body);
+
+  if (!validateOnboarding(onboardingObj)) {
+    return formatJSONResponse(400, {
+      error: "Onboarding not valid"
+    })
+  }
+
   let userId = event.requestContext.authorizer.claims.sub;
 
   try {
     let item = {
       id: userId,
-      onboarding: {
-        completed: true
-      }
+      onboarding: onboardingObj
     }
     let params = createUpdateParams(tableName, item, "id");
 
     let user = await ddb.update(params).promise();
 
-    console.log(user)
-
     if (user.Attributes) {
       console.log("Success");
-      return formatJSONResponse(200, user.Attributes);
+      return formatJSONResponse(200, user.Attributes.onboarding);
     } else {
       console.log("User not found")
       return formatJSONResponse(404, { error: 'User not found' });
@@ -49,7 +54,20 @@ const completeOnboarding: ValidatedEventAPIGatewayProxyEvent<typeof schema> = as
   }
 }
 
-function createUpdateParams(tableName: string, item: any, idAttributeName: string): aws.DynamoDB.DocumentClient.UpdateItemInput {
+const mapBodyToOnboarding = (body: any): IOnboarding => {
+  return {
+    completed: body.completed,
+  }
+}
+
+const validateOnboarding = (onboarding: IOnboarding): boolean => {
+  if (onboarding.completed !== true && onboarding.completed !== false)
+    return false;
+
+  return true;
+}
+
+const createUpdateParams = (tableName: string, item: any, idAttributeName: string): aws.DynamoDB.DocumentClient.UpdateItemInput => {
 
   var params = {
     TableName: tableName,
