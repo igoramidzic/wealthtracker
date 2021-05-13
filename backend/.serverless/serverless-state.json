@@ -206,7 +206,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/wealthtracker/dev/1620876130074-2021-05-13T03:22:10.074Z/wealthtracker.zip"
+                "S3Key": "serverless/wealthtracker/dev/1620877700750-2021-05-13T03:48:20.750Z/wealthtracker.zip"
               },
               "Handler": "src/functions/user/getUser/handler.main",
               "Runtime": "nodejs14.x",
@@ -238,7 +238,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/wealthtracker/dev/1620876130074-2021-05-13T03:22:10.074Z/wealthtracker.zip"
+                "S3Key": "serverless/wealthtracker/dev/1620877700750-2021-05-13T03:48:20.750Z/wealthtracker.zip"
               },
               "Handler": "src/functions/user/createUserOnSignUp/handler.main",
               "Runtime": "nodejs14.x",
@@ -270,7 +270,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/wealthtracker/dev/1620876130074-2021-05-13T03:22:10.074Z/wealthtracker.zip"
+                "S3Key": "serverless/wealthtracker/dev/1620877700750-2021-05-13T03:48:20.750Z/wealthtracker.zip"
               },
               "Handler": "src/functions/onboarding/completeOnboarding/handler.main",
               "Runtime": "nodejs14.x",
@@ -302,7 +302,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/wealthtracker/dev/1620876130074-2021-05-13T03:22:10.074Z/wealthtracker.zip"
+                "S3Key": "serverless/wealthtracker/dev/1620877700750-2021-05-13T03:48:20.750Z/wealthtracker.zip"
               },
               "Handler": "src/functions/plaid/getPlaidLinkToken/handler.main",
               "Runtime": "nodejs14.x",
@@ -339,7 +339,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/wealthtracker/dev/1620876130074-2021-05-13T03:22:10.074Z/wealthtracker.zip"
+                "S3Key": "serverless/wealthtracker/dev/1620877700750-2021-05-13T03:48:20.750Z/wealthtracker.zip"
               },
               "Handler": "src/functions/plaid/exchangePublicToken/handler.main",
               "Runtime": "nodejs14.x",
@@ -369,54 +369,54 @@
               "ExchangePublicTokenLogGroup"
             ]
           },
-          "GetUserLambdaVersion75bzzctkmgqy7Gjn9Xqo4RZTbSBEdwYbb2yyjs1hdIo": {
+          "GetUserLambdaVersion0sQFExG7OBXECXpkXMqMs4eSa4pRKoMzX6P2hw0yobE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetUserLambdaFunction"
               },
-              "CodeSha256": "BJjYXoNJzS8fzCHpKLN6BUYAG+yXoEQ3/jkwfQ3nPPo="
+              "CodeSha256": "ojv/iexsk92uLcGURsZDik+ERLJ6TmfwfKauTcXOShA="
             }
           },
-          "CreateUserOnSignUpLambdaVersion6USHmancAz9B9ad1k4r6jAsadgOcSG3iD9QPsTkZg": {
+          "CreateUserOnSignUpLambdaVersionh42VCN5TEKcqYm3IojMmMwQCDkGxEiCFF32PUCu8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateUserOnSignUpLambdaFunction"
               },
-              "CodeSha256": "BJjYXoNJzS8fzCHpKLN6BUYAG+yXoEQ3/jkwfQ3nPPo="
+              "CodeSha256": "ojv/iexsk92uLcGURsZDik+ERLJ6TmfwfKauTcXOShA="
             }
           },
-          "CompleteOnboardingLambdaVersionPQXmaykWhpT1Dsv9jB9v2lCgOua5iGsOS5peoygMN0": {
+          "CompleteOnboardingLambdaVersionaiQ8ih2iSu0XdHRaSkeERgDHbm0t6eauMWF7090epE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CompleteOnboardingLambdaFunction"
               },
-              "CodeSha256": "BJjYXoNJzS8fzCHpKLN6BUYAG+yXoEQ3/jkwfQ3nPPo="
+              "CodeSha256": "ojv/iexsk92uLcGURsZDik+ERLJ6TmfwfKauTcXOShA="
             }
           },
-          "GetPlaidLinkTokenLambdaVersionIBhf0WQkkyh4j3QoUEQXfFwah6CR99fnmYxOFSz8g": {
+          "GetPlaidLinkTokenLambdaVersion4aaC43Lx0DIDtkmUkJtsm2UY59aRq9WT8e7V1Ye2QV0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetPlaidLinkTokenLambdaFunction"
               },
-              "CodeSha256": "BJjYXoNJzS8fzCHpKLN6BUYAG+yXoEQ3/jkwfQ3nPPo="
+              "CodeSha256": "ojv/iexsk92uLcGURsZDik+ERLJ6TmfwfKauTcXOShA="
             }
           },
-          "ExchangePublicTokenLambdaVersionC4g4A1zWSAbmJaQYza71X66O9Si8A1pt6Acbn0": {
+          "ExchangePublicTokenLambdaVersionHCk7rz4pfUCn9S6vGw0oJAUtlM5k5OjhwOgk189eIk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ExchangePublicTokenLambdaFunction"
               },
-              "CodeSha256": "BJjYXoNJzS8fzCHpKLN6BUYAG+yXoEQ3/jkwfQ3nPPo="
+              "CodeSha256": "ojv/iexsk92uLcGURsZDik+ERLJ6TmfwfKauTcXOShA="
             }
           },
           "ApiGatewayRestApi": {
@@ -913,7 +913,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1620876121992": {
+          "ApiGatewayDeployment1620877690835": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1401,7 +1401,7 @@
           "GetUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetUserLambdaVersion75bzzctkmgqy7Gjn9Xqo4RZTbSBEdwYbb2yyjs1hdIo"
+              "Ref": "GetUserLambdaVersion0sQFExG7OBXECXpkXMqMs4eSa4pRKoMzX6P2hw0yobE"
             },
             "Export": {
               "Name": "sls-wealthtracker-dev-GetUserLambdaFunctionQualifiedArn"
@@ -1410,7 +1410,7 @@
           "CreateUserOnSignUpLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateUserOnSignUpLambdaVersion6USHmancAz9B9ad1k4r6jAsadgOcSG3iD9QPsTkZg"
+              "Ref": "CreateUserOnSignUpLambdaVersionh42VCN5TEKcqYm3IojMmMwQCDkGxEiCFF32PUCu8"
             },
             "Export": {
               "Name": "sls-wealthtracker-dev-CreateUserOnSignUpLambdaFunctionQualifiedArn"
@@ -1419,7 +1419,7 @@
           "CompleteOnboardingLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CompleteOnboardingLambdaVersionPQXmaykWhpT1Dsv9jB9v2lCgOua5iGsOS5peoygMN0"
+              "Ref": "CompleteOnboardingLambdaVersionaiQ8ih2iSu0XdHRaSkeERgDHbm0t6eauMWF7090epE"
             },
             "Export": {
               "Name": "sls-wealthtracker-dev-CompleteOnboardingLambdaFunctionQualifiedArn"
@@ -1428,7 +1428,7 @@
           "GetPlaidLinkTokenLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetPlaidLinkTokenLambdaVersionIBhf0WQkkyh4j3QoUEQXfFwah6CR99fnmYxOFSz8g"
+              "Ref": "GetPlaidLinkTokenLambdaVersion4aaC43Lx0DIDtkmUkJtsm2UY59aRq9WT8e7V1Ye2QV0"
             },
             "Export": {
               "Name": "sls-wealthtracker-dev-GetPlaidLinkTokenLambdaFunctionQualifiedArn"
@@ -1437,7 +1437,7 @@
           "ExchangePublicTokenLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ExchangePublicTokenLambdaVersionC4g4A1zWSAbmJaQYza71X66O9Si8A1pt6Acbn0"
+              "Ref": "ExchangePublicTokenLambdaVersionHCk7rz4pfUCn9S6vGw0oJAUtlM5k5OjhwOgk189eIk"
             },
             "Export": {
               "Name": "sls-wealthtracker-dev-ExchangePublicTokenLambdaFunctionQualifiedArn"
@@ -1619,7 +1619,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetUserLambdaVersion75bzzctkmgqy7Gjn9Xqo4RZTbSBEdwYbb2yyjs1hdIo"
+        "versionLogicalId": "GetUserLambdaVersion0sQFExG7OBXECXpkXMqMs4eSa4pRKoMzX6P2hw0yobE"
       },
       "createUserOnSignUp": {
         "handler": "src/functions/user/createUserOnSignUp/handler.main",
@@ -1643,7 +1643,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "CreateUserOnSignUpLambdaVersion6USHmancAz9B9ad1k4r6jAsadgOcSG3iD9QPsTkZg"
+        "versionLogicalId": "CreateUserOnSignUpLambdaVersionh42VCN5TEKcqYm3IojMmMwQCDkGxEiCFF32PUCu8"
       },
       "completeOnboarding": {
         "handler": "src/functions/onboarding/completeOnboarding/handler.main",
@@ -1697,7 +1697,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "CompleteOnboardingLambdaVersionPQXmaykWhpT1Dsv9jB9v2lCgOua5iGsOS5peoygMN0"
+        "versionLogicalId": "CompleteOnboardingLambdaVersionaiQ8ih2iSu0XdHRaSkeERgDHbm0t6eauMWF7090epE"
       },
       "getPlaidLinkToken": {
         "handler": "src/functions/plaid/getPlaidLinkToken/handler.main",
@@ -1756,7 +1756,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetPlaidLinkTokenLambdaVersionIBhf0WQkkyh4j3QoUEQXfFwah6CR99fnmYxOFSz8g"
+        "versionLogicalId": "GetPlaidLinkTokenLambdaVersion4aaC43Lx0DIDtkmUkJtsm2UY59aRq9WT8e7V1Ye2QV0"
       },
       "exchangePublicToken": {
         "handler": "src/functions/plaid/exchangePublicToken/handler.main",
@@ -1815,7 +1815,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "ExchangePublicTokenLambdaVersionC4g4A1zWSAbmJaQYza71X66O9Si8A1pt6Acbn0"
+        "versionLogicalId": "ExchangePublicTokenLambdaVersionHCk7rz4pfUCn9S6vGw0oJAUtlM5k5OjhwOgk189eIk"
       }
     },
     "resources": {
@@ -2130,7 +2130,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/wealthtracker/dev/1620876130074-2021-05-13T03:22:10.074Z",
+    "artifactDirectoryName": "serverless/wealthtracker/dev/1620877700750-2021-05-13T03:48:20.750Z",
     "artifact": ""
   }
 }

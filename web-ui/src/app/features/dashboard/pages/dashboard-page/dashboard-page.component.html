@@ -1,3 +1,14 @@
-<pre>{{ userService.user$ | async | json }}</pre>
+<div class="p-px-4">
+    <pre>{{ userService.user$ | async | json }}</pre>
 
-<button pButton (click)="plaid.openPlaidLink()">Plaid Link</button>
+    <button pButton (click)="plaid.openPlaidLink()" [disabled]="!(plaid.plaidLinkServiceAvailable$ | async)">Plaid Link</button>
+
+    <div *ngIf="successRes" class="p-pt-5">
+        <h3 class="p-mb-4">Accounts</h3>
+
+        <div *ngFor="let account of successRes?.metadata.accounts" class="p-mb-3">
+            <h5>{{ account.name }}</h5>
+            <p>{{ account.subtype }}</p>
+        </div>
+    </div>
+</div>
