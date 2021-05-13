@@ -61,6 +61,7 @@ const mapBodyToOnboarding = (body: any): IOnboarding => {
 }
 
 const validateOnboarding = (onboarding: IOnboarding): boolean => {
+  if (onboarding == undefined) return false;
   if (onboarding.completed !== true && onboarding.completed !== false)
     return false;
 

@@ -3,6 +3,8 @@ import type { AWS } from '@serverless/typescript';
 import getUser from '@functions/user/getUser';
 import createUserOnSignUp from '@functions/user/createUserOnSignUp';
 import completeOnboarding from '@functions/onboarding/completeOnboarding';
+import getPlaidLinkToken from '@functions/plaid/getPlaidLinkToken';
+import exchangePublicToken from '@functions/plaid/exchangePublicToken';
 
 const serverlessConfiguration: AWS = {
   service: 'wealthtracker',
@@ -28,7 +30,7 @@ const serverlessConfiguration: AWS = {
     lambdaHashingVersion: '20201221',
   },
   // import the function via paths
-  functions: { getUser, createUserOnSignUp, completeOnboarding },
+  functions: { getUser, createUserOnSignUp, completeOnboarding, getPlaidLinkToken, exchangePublicToken },
   useDotenv: true,
   resources: {
     Resources: {
@@ -43,6 +45,31 @@ const serverlessConfiguration: AWS = {
           KeySchema: [{
             AttributeName: 'id',
             KeyType: 'HASH'
+          }],
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1
+          }
+        },
+        DeletionPolicy: "Delete"
+      },
+      accountTable: {
+        Type: "AWS::DynamoDB::Table",
+        Properties: {
+          TableName: '${self:service}-account-${sls:stage}',
+          AttributeDefinitions: [{
+            AttributeName: 'accountId',
+            AttributeType: 'S'
+          }, {
+            AttributeName: 'userId',
+            AttributeType: 'S'
+          }],
+          KeySchema: [{
+            AttributeName: 'accountId',
+            KeyType: 'HASH'
+          }, {
+            AttributeName: 'userId',
+            KeyType: 'RANGE'
           }],
           ProvisionedThroughput: {
             ReadCapacityUnits: 1,
