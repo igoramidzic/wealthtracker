@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../../models/user';
+import { IOnboarding } from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,9 @@ export class UserService implements IUser {
           this.fetchingUser = false;
         })
     })
+  }
+
+  setOnboarding(onboarding: IOnboarding): void {
+    this.user.onboarding = onboarding;
   }
 }

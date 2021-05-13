@@ -28,6 +28,11 @@ const routes: Routes = [
         canActivate: [UserGuard],
         children: [
           {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: PAGE_ROUTES_CONSTANTS.DASHBOARD,
+          },
+          {
             path: PAGE_ROUTES_CONSTANTS.DASHBOARD,
             canActivate: [OnboardingCompleteGuard],
             loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)

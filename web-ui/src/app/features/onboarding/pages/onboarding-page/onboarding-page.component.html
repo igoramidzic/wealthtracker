@@ -1,11 +1,15 @@
-<div class="d-flex align-items-center justify-content-center h-100">
-    <div class="d-flex flex-column align-items-center w-100">
-        <app-onboarding-complete-message *ngIf="onboardingO.completed" class="d-block mb-5"></app-onboarding-complete-message>
+<div class="p-py-5 p-d-flex p-jc-center p-ai-center">
+    <div>
+        <!-- <app-onboarding-complete-message *ngIf="onboardingO.completed" class="d-block mb-5"></app-onboarding-complete-message>
         <app-onboarding-saving *ngIf="onboardingO.saving" class="d-block mb-5"></app-onboarding-saving>
         <app-onboarding-question-chooser *ngIf="!onboardingO.saving && !onboardingO.completed" [onboardingO]="onboardingO" class="d-block mb-5 w-100"></app-onboarding-question-chooser>
         <app-onboarding-navigation-buttons *ngIf="onboardingO.answeringQuestions" class="d-block mb-5" [onboardingO]="onboardingO"></app-onboarding-navigation-buttons>
         <div style="max-width: 400px; width: 100%">
             <app-onboarding-progress [onboardingO]="onboardingO"></app-onboarding-progress>
-        </div>
+        </div> -->
+        <h3 class="p-mb-1">Welcome</h3>
+        <h5 class="p-mb-2">You're currently onboarding</h5>
+        <p class="p-mb-5">There are no items required to be completed.</p>
+        <button pButton class="p-button-primary p-button-lg" (click)="onCompleteOnboarding()" [disabled]="completing">Complete Onboarding</button>
     </div>
 </div>

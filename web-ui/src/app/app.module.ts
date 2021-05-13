@@ -11,7 +11,6 @@ import Amplify from "aws-amplify";
 import awsconfig from "../aws-exports";
 import { WealthTrackerApiHttpInterceptor } from './core/interceptors/wealthtracker_api.interceptor';
 
-
 Amplify.configure(awsconfig);
 
 @NgModule({
@@ -25,13 +24,13 @@ Amplify.configure(awsconfig);
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS, useClass: WealthTrackerApiHttpInterceptor, multi: true
-    }
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

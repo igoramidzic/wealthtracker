@@ -1,5 +1,5 @@
 export enum PAGE_ROUTES_CONSTANTS {
-  DASHBOARD = '',
+  DASHBOARD = 'dashboard',
   AUTH = 'auth',
   ONBOARDING = 'onboarding'
 }
