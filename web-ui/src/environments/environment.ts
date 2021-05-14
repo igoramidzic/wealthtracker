@@ -6,14 +6,14 @@ import { EEnvironment, IEnvironment } from './ienvironment';
 
 export const environment: IEnvironment = {
   environment: EEnvironment.Development,
-  wealthtracker_api_url: 'https://tw71jcqt3g.execute-api.us-east-2.amazonaws.com/dev',
+  wealthtracker_api_url: 'https://jkjfx8zlc5.execute-api.us-east-2.amazonaws.com/dev',
   plaid: {
     client_id: "5e24db63dad2b80015cc8eec",
     environment: "sandbox",
     apiVersion: "v2",
     clientName: "",
     countryCodes: ["US"],
-    products: ['auth', 'transactions', 'investments']
+    products: ['auth', 'transactions']
   }
 };
 
