@@ -1,5 +1,6 @@
 // import schema from './schema';
 import { handlerPath } from '@libs/handlerResolver';
+// import schema from './schema';
 
 export default {
   handler: `${handlerPath(__dirname)}/handler.main`,
@@ -8,6 +9,11 @@ export default {
       http: {
         method: 'post',
         path: 'onboarding/complete',
+        // request: { // This doesn't work for some reason. Causes deployment failure
+        //   schema: {
+        //     'application/json': schema
+        //   }
+        // },
         authorizer: {
           type: 'COGNITO_USER_POOLS',
           authorizerId: {
@@ -19,7 +25,7 @@ export default {
     }
   ],
   environment: {
-    DYNAMODB_USER_TABLE: '${self:service}-user-${sls:stage}',
-    DYNAMODB_USER_TABLE_REGION: 'us-east-2'
+    USER_TABLE: '${self:custom.environment.USER_TABLE}',
+    REGION: '${self:provider.region}'
   }
 }

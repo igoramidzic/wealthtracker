@@ -6,8 +6,8 @@ export default {
   events: [
     {
       http: {
-        method: 'get',
-        path: 'plaid/link/token',
+        method: 'post',
+        path: 'plaid/item/public_token/exchange',
         authorizer: {
           type: 'COGNITO_USER_POOLS',
           authorizerId: {

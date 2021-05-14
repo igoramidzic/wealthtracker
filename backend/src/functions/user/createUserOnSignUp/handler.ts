@@ -11,8 +11,8 @@ const createUserOnSignUp = async (event: PostConfirmationConfirmSignUpTriggerEve
 
   let date = new Date();
 
-  const tableName = process.env.DYNAMODB_USER_TABLE;
-  const region = process.env.DYNAMODB_USER_TABLE_REGION;
+  const tableName = process.env.USER_TABLE;
+  const region = process.env.REGION;
 
   aws.config.update({ region: region });
 

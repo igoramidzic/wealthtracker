@@ -3,18 +3,25 @@ import type { AWS } from '@serverless/typescript';
 import getUser from '@functions/user/getUser';
 import createUserOnSignUp from '@functions/user/createUserOnSignUp';
 import completeOnboarding from '@functions/onboarding/completeOnboarding';
-import getPlaidLinkToken from '@functions/plaid/getPlaidLinkToken';
+import createLinkToken from '@functions/plaid/createLinkToken';
 import exchangePublicToken from '@functions/plaid/exchangePublicToken';
+import addAccount from '@functions/account/addAccount';
+import getAccounts from '@functions/account/getAccounts';
 
 const serverlessConfiguration: AWS = {
   service: 'wealthtracker',
   frameworkVersion: '2',
   plugins: ['serverless-webpack', 'serverless-offline'],
+  variablesResolutionMode: "20210326",
   custom: {
     webpack: {
       webpackConfig: './webpack.config.js',
       includeModules: true,
-    }
+    },
+    environment: {
+      USER_TABLE: '${self:service}-user-${sls:stage}',
+      ACCOUNT_TABLE: '${self:service}-account-${sls:stage}',
+    },
   },
   provider: {
     name: 'aws',
@@ -28,9 +35,15 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
     },
     lambdaHashingVersion: '20201221',
+    iamManagedPolicies: [
+      "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+    ]
   },
   // import the function via paths
-  functions: { getUser, createUserOnSignUp, completeOnboarding, getPlaidLinkToken, exchangePublicToken },
+  functions: {
+    getUser, createUserOnSignUp, completeOnboarding, createLinkToken, exchangePublicToken,
+    addAccount, getAccounts
+  },
   useDotenv: true,
   resources: {
     Resources: {
@@ -65,10 +78,10 @@ const serverlessConfiguration: AWS = {
             AttributeType: 'S'
           }],
           KeySchema: [{
-            AttributeName: 'accountId',
+            AttributeName: 'userId',
             KeyType: 'HASH'
           }, {
-            AttributeName: 'userId',
+            AttributeName: 'accountId',
             KeyType: 'RANGE'
           }],
           ProvisionedThroughput: {

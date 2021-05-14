@@ -9,8 +9,8 @@ import schema from './schema';
 import { IOnboarding } from 'src/models/user';
 
 const completeOnboarding: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event, context) => {
-  const tableName = process.env.DYNAMODB_USER_TABLE;
-  const region = process.env.DYNAMODB_USER_TABLE_REGION;
+  const tableName = process.env.USER_TABLE;
+  const region = process.env.REGION;
 
   aws.config.update({ region });
 

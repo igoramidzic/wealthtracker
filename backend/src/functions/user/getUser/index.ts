@@ -19,7 +19,7 @@ export default {
     }
   ],
   environment: {
-    DYNAMODB_USER_TABLE: '${self:service}-user-${sls:stage}',
-    DYNAMODB_USER_TABLE_REGION: 'us-east-2'
+    USER_TABLE: '${self:custom.environment.USER_TABLE}',
+    REGION: '${self:provider.region}'
   }
 }
