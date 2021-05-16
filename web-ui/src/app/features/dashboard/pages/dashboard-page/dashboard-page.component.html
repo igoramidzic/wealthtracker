@@ -1,14 +1,15 @@
 <div class="p-px-4">
-    <pre>{{ userService.user$ | async | json }}</pre>
-
     <button pButton (click)="plaid.openPlaidLink()" [disabled]="!(plaid.plaidLinkServiceAvailable$ | async)">Plaid Link</button>
 
-    <div *ngIf="successRes" class="p-pt-5">
+    <div class="p-pt-5">
         <h3 class="p-mb-4">Accounts</h3>
 
-        <div *ngFor="let account of successRes?.metadata.accounts" class="p-mb-3">
-            <h5>{{ account.name }}</h5>
-            <p>{{ account.subtype }}</p>
+        <div *ngFor="let item of items" class="p-mb-4">
+            <h3 class="p-mb-2">{{ item.institution.name }}</h3>
+
+            <div *ngFor="let account of item.accounts" class="p-mb-2">
+                {{account.balances.current | currency:account.balances.isoCurrencyCode}}
+            </div>
         </div>
     </div>
 </div>

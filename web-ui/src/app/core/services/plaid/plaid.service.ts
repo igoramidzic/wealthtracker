@@ -57,7 +57,6 @@ export class PlaidService {
 
   createLinkToken(): Promise<string> {
     return new Promise((resolve, reject) => {
-      console.log(environment.wealthtracker_api_url)
       this.http.get(environment.wealthtracker_api_url + '/plaid/link/token').toPromise()
         .then((res: { link_token: string }) => {
           this.setLinkToken(res.link_token);

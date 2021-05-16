@@ -99,7 +99,7 @@ export class AuthService {
 
     try {
       let signInResult = await Auth.signIn(email, password);
-      console.log(signInResult.sinInUserSession.idToken.jwtToken);
+      console.log(signInResult.signInUserSession.idToken.jwtToken);
       this.setNextStep(AuthNextStep.None);
 
       return signInResult;

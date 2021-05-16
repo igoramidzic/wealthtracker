@@ -9,7 +9,7 @@ export const environment: IEnvironment = {
   wealthtracker_api_url: 'https://jkjfx8zlc5.execute-api.us-east-2.amazonaws.com/dev',
   plaid: {
     client_id: "5e24db63dad2b80015cc8eec",
-    environment: "sandbox",
+    environment: EPlaidEnvironment.SANDBOX,
     apiVersion: "v2",
     clientName: "",
     countryCodes: ["US"],
@@ -25,4 +25,5 @@ export const environment: IEnvironment = {
  * on performance if an error is thrown.
  */
 import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+import { EPlaidEnvironment } from 'src/app/core/models/plaid';
 

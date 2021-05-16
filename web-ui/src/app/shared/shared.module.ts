@@ -11,6 +11,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DividerModule } from 'primeng/divider';
+import { AlertNavbarComponent } from './components/navbar/alert-navbar/alert-navbar.component';
 
 @NgModule({
   imports: [
@@ -24,11 +25,12 @@ import { DividerModule } from 'primeng/divider';
     InputTextModule,
     MessagesModule,
     MessageModule,
-    DividerModule
+    DividerModule,
   ],
   declarations: [
     MainNavbarComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    AlertNavbarComponent
   ],
   exports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { DividerModule } from 'primeng/divider';
     InputTextModule,
     MessagesModule,
     MessageModule,
-    DividerModule
+    DividerModule,
+    AlertNavbarComponent
   ],
 })
 export class SharedModule { }
