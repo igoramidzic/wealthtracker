@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IItem } from 'src/app/core/models/item';
 import { PlaidService } from '../../../../core/services/plaid/plaid.service';
-import { AccountService } from '../../../../core/services/item/item.service';
+import { AccountsService } from '../../../../core/services/accounts/accounts.service';
 
 @Component({
   selector: 'app-add-account-button',
@@ -13,7 +13,7 @@ export class AddAccountButtonComponent implements OnInit {
   @Output() addedAccount: EventEmitter<IItem>;
 
   constructor(public plaidService: PlaidService,
-    private accountsService: AccountService) {
+    private accountsService: AccountsService) {
     this.addedAccount = new EventEmitter();
   }
 

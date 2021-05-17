@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IItem } from 'src/app/core/models/item';
 import { PlaidService } from 'src/app/core/services/plaid/plaid.service';
-import { AccountsService } from '../../../../core/services/accounts.service';
+import { AccountsService } from '../../../../core/services/accounts/accounts.service';
 
 @Component({
   selector: 'app-accounts-page',
@@ -18,6 +18,9 @@ export class AccountsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getInitialItems();
+    this.accountsService.items$.subscribe(items => {
+      this.items = items;
+    })
   }
 
   async getInitialItems(): Promise<void> {

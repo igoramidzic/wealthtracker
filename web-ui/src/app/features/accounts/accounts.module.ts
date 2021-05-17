@@ -8,6 +8,7 @@ import { AccountsPageComponent } from './pages/accounts-page/accounts-page.compo
 import { AccountItemListComponent } from './components/account-item-list/account-item-list.component';
 import { ErrorLoadingAccountsComponent } from './components/error-loading-accounts/error-loading-accounts.component';
 import { EmptyAccountsListComponent } from './components/empty-accounts-list/empty-accounts-list.component';
+import { ItemDeleteButtonComponent } from './components/item-delete-button/item-delete-button.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { EmptyAccountsListComponent } from './components/empty-accounts-list/emp
     AccountsPageComponent,
     AccountItemListComponent,
     ErrorLoadingAccountsComponent,
-    EmptyAccountsListComponent
+    EmptyAccountsListComponent,
+    ItemDeleteButtonComponent
   ],
   imports: [
     CommonModule,
