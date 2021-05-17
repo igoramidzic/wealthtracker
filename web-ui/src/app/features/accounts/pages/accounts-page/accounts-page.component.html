@@ -1,0 +1,17 @@
+<div class="p-p-5">
+    <div *ngIf="showItems">
+        <div class="p-d-flex p-jc-between">
+            <h2 class="p-mb-4">Accounts</h2>
+            <app-add-account-button (addedAccount)="onAddedAccount($event)"></app-add-account-button>
+        </div>
+        <app-account-item-list [items]="items"></app-account-item-list>
+    </div>
+
+    <div *ngIf="fetchingItems">
+        Loading items...
+    </div>
+
+    <div *ngIf="errorLoadingItems">
+        <app-error-loading-accounts (tryAgain)="tryFetchingItemsAgain()"></app-error-loading-accounts>
+    </div>
+</div>

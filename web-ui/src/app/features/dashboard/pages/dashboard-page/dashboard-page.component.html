@@ -1,15 +1,4 @@
-<div class="p-px-4">
-    <button pButton (click)="plaid.openPlaidLink()" [disabled]="!(plaid.plaidLinkServiceAvailable$ | async)">Plaid Link</button>
-
-    <div class="p-pt-5">
-        <h3 class="p-mb-4">Accounts</h3>
-
-        <div *ngFor="let item of items" class="p-mb-4">
-            <h3 class="p-mb-2">{{ item.institution.name }}</h3>
-
-            <div *ngFor="let account of item.accounts" class="p-mb-2">
-                {{account.balances.current | currency:account.balances.isoCurrencyCode}}
-            </div>
-        </div>
-    </div>
+<div class="p-p-5">
+    <h3>Only working feature is Accounts, and its in development.</h3>
+    <a [routerLink]="['/'+PAGE_ROUTES_CONSTANTS.ACCOUNTS]">Accounts</a>
 </div>

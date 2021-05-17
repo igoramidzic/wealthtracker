@@ -7,6 +7,7 @@ import { OnboardingIncompleteGuard } from './core/guards/onboarding-incomplete/o
 import { OnboardingCompleteGuard } from './core/guards/onboarding-complete/onboarding-complete.guard';
 import { OopsGuard } from './core/guards/oops/oops.guard';
 import { UserGuard } from './core/guards/user/user.guard';
+import { AccountsModule } from './features/accounts/accounts.module';
 
 const routes: Routes = [
   {
@@ -28,23 +29,37 @@ const routes: Routes = [
         canActivate: [UserGuard],
         children: [
           {
-            path: '',
-            pathMatch: 'full',
-            redirectTo: PAGE_ROUTES_CONSTANTS.DASHBOARD,
-          },
-          {
-            path: PAGE_ROUTES_CONSTANTS.DASHBOARD,
-            canActivate: [OnboardingCompleteGuard],
-            loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
-          },
-          {
             path: PAGE_ROUTES_CONSTANTS.ONBOARDING,
             canActivate: [OnboardingIncompleteGuard],
             loadChildren: () => import('./features/onboarding/onboarding.module').then(m => m.OnboardingModule)
-          }
+          },
+          {
+            path: '',
+            canActivate: [OnboardingCompleteGuard],
+            children: [
+              {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: PAGE_ROUTES_CONSTANTS.DASHBOARD,
+              },
+              {
+                path: PAGE_ROUTES_CONSTANTS.DASHBOARD,
+                loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
+              },
+              {
+                path: PAGE_ROUTES_CONSTANTS.ACCOUNTS,
+                loadChildren: () => import('./features/accounts/accounts.module').then(m => m.AccountsModule)
+              }
+            ]
+          },
         ]
       }
     ]
+  },
+  {
+    path: '**',
+    redirectTo: PAGE_ROUTES_CONSTANTS.DASHBOARD,
+    pathMatch: 'full'
   }
 ];
 

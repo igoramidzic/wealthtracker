@@ -13,8 +13,8 @@ import {
   NgxPlaidLinkService,
   PlaidLinkHandler
 } from "ngx-plaid-link";
-import { AccountsResponse } from 'plaid';
 import { environment } from '../../../../environments/environment';
+import { AccountsResponse } from 'plaid';
 
 @Injectable({
   providedIn: 'root'
@@ -74,22 +74,6 @@ export class PlaidService {
     this.plaidLinkHandler.exit();
   }
 
-  getAccounts(): Promise<AccountsResponse> {
-    return this.http.get<AccountsResponse>(environment.wealthtracker_api_url + '/plaid/accounts/get').toPromise();
-  }
-
-  private exchangePublicToken(public_token: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.http.post(environment.wealthtracker_api_url + '/plaid/item/public_token/exchange', {
-        public_token
-      }).toPromise()
-        .then((res: any) => {
-          resolve();
-        })
-        .catch(e => reject());
-    })
-  }
-
   private createPlaidLinkHandler(): void {
     this.plaidLinkService
       .createPlaid(this.config)
@@ -101,18 +85,14 @@ export class PlaidService {
   }
 
   private onSuccess(token: string, metadata: PlaidSuccessMetadata) {
-    // this.exchangePublicToken(token)
-    console.log(token, metadata)
     this.success.emit({ token, metadata });
   }
 
   private onEvent(eventName: string, metadata: PlaidEventMetadata) {
-    console.log(eventName, metadata)
     this.event.emit({ eventName, metadata });
   }
 
   private onExit(error: PlaidErrorObject, metadata: PlaidErrorMetadata) {
-    console.log(error, metadata)
     this.exit.emit({ error, metadata });
   }
 

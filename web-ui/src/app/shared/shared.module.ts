@@ -12,6 +12,8 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DividerModule } from 'primeng/divider';
 import { AlertNavbarComponent } from './components/navbar/alert-navbar/alert-navbar.component';
+import { FieldsetModule } from 'primeng/fieldset';
+import { AddAccountButtonComponent } from './components/accounts/add-account-button/add-account-button.component';
 
 @NgModule({
   imports: [
@@ -26,11 +28,13 @@ import { AlertNavbarComponent } from './components/navbar/alert-navbar/alert-nav
     MessagesModule,
     MessageModule,
     DividerModule,
+    FieldsetModule
   ],
   declarations: [
     MainNavbarComponent,
     ProgressBarComponent,
-    AlertNavbarComponent
+    AlertNavbarComponent,
+    AddAccountButtonComponent
   ],
   exports: [
     CommonModule,
@@ -45,7 +49,9 @@ import { AlertNavbarComponent } from './components/navbar/alert-navbar/alert-nav
     MessagesModule,
     MessageModule,
     DividerModule,
-    AlertNavbarComponent
+    AlertNavbarComponent,
+    FieldsetModule,
+    AddAccountButtonComponent
   ],
 })
 export class SharedModule { }

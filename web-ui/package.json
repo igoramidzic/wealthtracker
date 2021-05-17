@@ -28,7 +28,7 @@
     "@aws-amplify/ui-angular": "^1.0.7",
     "aws-amplify": "^3.3.27",
     "ngx-plaid-link": "^1.0.3",
-    "plaid": "^8.4.0",
+    "plaid": "^8.5.0",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
     "primeng": "^11.4.0",
