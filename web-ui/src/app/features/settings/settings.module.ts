@@ -9,6 +9,9 @@ import { AccountItemListComponent } from './components/account-item-list/account
 import { ErrorLoadingAccountsComponent } from './components/error-loading-accounts/error-loading-accounts.component';
 import { EmptyAccountsListComponent } from './components/empty-accounts-list/empty-accounts-list.component';
 import { ItemDeleteButtonComponent } from './components/item-delete-button/item-delete-button.component';
+import { SettingsMenuComponent } from './components/settings-menu/settings-menu.component';
+import { SecurityPageComponent } from './pages/security-page/security-page.component';
+import { GeneralSettingsPageComponent } from './pages/general-settings-page/general-settings-page.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { ItemDeleteButtonComponent } from './components/item-delete-button/item-
     AccountItemListComponent,
     ErrorLoadingAccountsComponent,
     EmptyAccountsListComponent,
-    ItemDeleteButtonComponent
+    ItemDeleteButtonComponent,
+    SettingsMenuComponent,
+    SecurityPageComponent,
+    GeneralSettingsPageComponent
   ],
   imports: [
     CommonModule,
