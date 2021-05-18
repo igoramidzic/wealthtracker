@@ -5,8 +5,9 @@ import createUserOnSignUp from '@functions/user/createUserOnSignUp';
 import completeOnboarding from '@functions/onboarding/completeOnboarding';
 import createLinkToken from '@functions/plaid/createLinkToken';
 import exchangePublicToken from '@functions/plaid/exchangePublicToken';
-import addAccount from '@functions/account/addAccount';
-import getAccounts from '@functions/account/getAccounts';
+import addItem from '@functions/items/addItem';
+import deleteItem from '@functions/items/deleteItem';
+import getItems from '@functions/items/getItems';
 
 const serverlessConfiguration: AWS = {
   service: 'wealthtracker',
@@ -18,11 +19,8 @@ const serverlessConfiguration: AWS = {
       webpackConfig: './webpack.config.js',
       includeModules: true,
     },
-    environment: {
-      USER_TABLE: '${self:service}-user-${sls:stage}',
-      ACCOUNT_TABLE: '${self:service}-account-${sls:stage}',
-    },
   },
+
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
@@ -32,17 +30,29 @@ const serverlessConfiguration: AWS = {
       shouldStartNameWithService: true,
     },
     environment: {
-      AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
+      USER_TABLE: '${self:service}-user-${sls:stage}',
+      ITEMS_TABLE_PLAID_SANDBOX: '${self:service}-items-plaid_sandbox-${sls:stage}',
+      ITEMS_TABLE_PLAID_DEVELOPMENT: '${self:service}-items-plaid_development-${sls:stage}',
+      ITEMS_TABLE_PLAID_PRODUCTION: '${self:service}-items-plaid_production-${sls:stage}',
+      REGION: '${self:provider.region}',
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      PARAMETERS_PATH: '/${self:service}/${sls:stage}',
+      PLAID_CLIENT_ID_PATH: '/${self:service}/${sls:stage}/plaid_client_id',
+      PLAID_SECRET_PATH: '/${self:service}/${sls:stage}/plaid_secret',
+      PLAID_ENV_PATH: '/${self:service}/${sls:stage}/plaid_env',
+      PLAID_PRODUCTS_PATH: '/${self:service}/${sls:stage}/plaid_products',
+      PLAID_COUNTRY_CODES_PATH: '/${self:service}/${sls:stage}/plaid_country_codes',
     },
     lambdaHashingVersion: '20201221',
     iamManagedPolicies: [
-      "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+      "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
+      "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
     ]
   },
   // import the function via paths
   functions: {
     getUser, createUserOnSignUp, completeOnboarding, createLinkToken, exchangePublicToken,
-    addAccount, getAccounts
+    addItem, deleteItem, getItems
   },
   useDotenv: true,
   resources: {
@@ -66,12 +76,12 @@ const serverlessConfiguration: AWS = {
         },
         DeletionPolicy: "Delete"
       },
-      accountTable: {
+      itemsTableSandbox: {
         Type: "AWS::DynamoDB::Table",
         Properties: {
-          TableName: '${self:service}-account-${sls:stage}',
+          TableName: '${self:service}-items-plaid_sandbox-${sls:stage}',
           AttributeDefinitions: [{
-            AttributeName: 'accountId',
+            AttributeName: 'itemId',
             AttributeType: 'S'
           }, {
             AttributeName: 'userId',
@@ -81,7 +91,57 @@ const serverlessConfiguration: AWS = {
             AttributeName: 'userId',
             KeyType: 'HASH'
           }, {
-            AttributeName: 'accountId',
+            AttributeName: 'itemId',
+            KeyType: 'RANGE'
+          }],
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1
+          }
+        },
+        DeletionPolicy: "Delete"
+      },
+      itemsTableDevelopment: {
+        Type: "AWS::DynamoDB::Table",
+        Properties: {
+          TableName: '${self:service}-items-plaid_development-${sls:stage}',
+          AttributeDefinitions: [{
+            AttributeName: 'itemId',
+            AttributeType: 'S'
+          }, {
+            AttributeName: 'userId',
+            AttributeType: 'S'
+          }],
+          KeySchema: [{
+            AttributeName: 'userId',
+            KeyType: 'HASH'
+          }, {
+            AttributeName: 'itemId',
+            KeyType: 'RANGE'
+          }],
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1
+          }
+        },
+        DeletionPolicy: "Delete"
+      },
+      itemsTableProduction: {
+        Type: "AWS::DynamoDB::Table",
+        Properties: {
+          TableName: '${self:service}-items-plaid_production-${sls:stage}',
+          AttributeDefinitions: [{
+            AttributeName: 'itemId',
+            AttributeType: 'S'
+          }, {
+            AttributeName: 'userId',
+            AttributeType: 'S'
+          }],
+          KeySchema: [{
+            AttributeName: 'userId',
+            KeyType: 'HASH'
+          }, {
+            AttributeName: 'itemId',
             KeyType: 'RANGE'
           }],
           ProvisionedThroughput: {

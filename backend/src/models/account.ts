@@ -1,8 +1,13 @@
 export interface IAccount {
     accountId: string;
-    userId: string;
-    mask: number;
-    itemId: string;
-    accessToken: string;
-    createdAt: string;
+    balances: {
+        available: number;
+        current: number;
+        isoCurrencyCode: string;
+    },
+    mask: string;
+    name: string;
+    officialName: string;
+    subtype: string;
+    type: string;
 }

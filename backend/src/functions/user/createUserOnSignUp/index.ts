@@ -30,7 +30,5 @@ export default {
     postConfirmationEvent
   ],
   environment: {
-    USER_TABLE: '${self:custom.environment.USER_TABLE}',
-    REGION: '${self:provider.region}'
   }
 }

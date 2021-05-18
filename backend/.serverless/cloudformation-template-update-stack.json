@@ -101,16 +101,22 @@
         "LogGroupName": "/aws/lambda/wealthtracker-dev-exchangePublicToken"
       }
     },
-    "AddAccountLogGroup": {
+    "AddItemLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/wealthtracker-dev-addAccount"
+        "LogGroupName": "/aws/lambda/wealthtracker-dev-addItem"
       }
     },
-    "GetAccountsLogGroup": {
+    "DeleteItemLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/wealthtracker-dev-getAccounts"
+        "LogGroupName": "/aws/lambda/wealthtracker-dev-deleteItem"
+      }
+    },
+    "GetItemsLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/wealthtracker-dev-getItems"
       }
     },
     "IamRoleLambdaExecution": {
@@ -189,7 +195,8 @@
           ]
         },
         "ManagedPolicyArns": [
-          "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+          "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
+          "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
         ]
       }
     },
@@ -200,7 +207,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1620961818797-2021-05-14T03:10:18.797Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
         },
         "Handler": "src/functions/user/getUser/handler.main",
         "Runtime": "nodejs14.x",
@@ -209,9 +216,18 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "USER_TABLE": "wealthtracker-user-dev",
-            "REGION": "us-east-2"
+            "ITEMS_TABLE_PLAID_SANDBOX": "wealthtracker-items-plaid_sandbox-dev",
+            "ITEMS_TABLE_PLAID_DEVELOPMENT": "wealthtracker-items-plaid_development-dev",
+            "ITEMS_TABLE_PLAID_PRODUCTION": "wealthtracker-items-plaid_production-dev",
+            "REGION": "us-east-2",
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "PARAMETERS_PATH": "/wealthtracker/dev",
+            "PLAID_CLIENT_ID_PATH": "/wealthtracker/dev/plaid_client_id",
+            "PLAID_SECRET_PATH": "/wealthtracker/dev/plaid_secret",
+            "PLAID_ENV_PATH": "/wealthtracker/dev/plaid_env",
+            "PLAID_PRODUCTS_PATH": "/wealthtracker/dev/plaid_products",
+            "PLAID_COUNTRY_CODES_PATH": "/wealthtracker/dev/plaid_country_codes"
           }
         },
         "Role": {
@@ -232,7 +248,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1620961818797-2021-05-14T03:10:18.797Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
         },
         "Handler": "src/functions/user/createUserOnSignUp/handler.main",
         "Runtime": "nodejs14.x",
@@ -241,9 +257,18 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "USER_TABLE": "wealthtracker-user-dev",
-            "REGION": "us-east-2"
+            "ITEMS_TABLE_PLAID_SANDBOX": "wealthtracker-items-plaid_sandbox-dev",
+            "ITEMS_TABLE_PLAID_DEVELOPMENT": "wealthtracker-items-plaid_development-dev",
+            "ITEMS_TABLE_PLAID_PRODUCTION": "wealthtracker-items-plaid_production-dev",
+            "REGION": "us-east-2",
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "PARAMETERS_PATH": "/wealthtracker/dev",
+            "PLAID_CLIENT_ID_PATH": "/wealthtracker/dev/plaid_client_id",
+            "PLAID_SECRET_PATH": "/wealthtracker/dev/plaid_secret",
+            "PLAID_ENV_PATH": "/wealthtracker/dev/plaid_env",
+            "PLAID_PRODUCTS_PATH": "/wealthtracker/dev/plaid_products",
+            "PLAID_COUNTRY_CODES_PATH": "/wealthtracker/dev/plaid_country_codes"
           }
         },
         "Role": {
@@ -264,7 +289,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1620961818797-2021-05-14T03:10:18.797Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
         },
         "Handler": "src/functions/onboarding/completeOnboarding/handler.main",
         "Runtime": "nodejs14.x",
@@ -273,9 +298,18 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "USER_TABLE": "wealthtracker-user-dev",
-            "REGION": "us-east-2"
+            "ITEMS_TABLE_PLAID_SANDBOX": "wealthtracker-items-plaid_sandbox-dev",
+            "ITEMS_TABLE_PLAID_DEVELOPMENT": "wealthtracker-items-plaid_development-dev",
+            "ITEMS_TABLE_PLAID_PRODUCTION": "wealthtracker-items-plaid_production-dev",
+            "REGION": "us-east-2",
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "PARAMETERS_PATH": "/wealthtracker/dev",
+            "PLAID_CLIENT_ID_PATH": "/wealthtracker/dev/plaid_client_id",
+            "PLAID_SECRET_PATH": "/wealthtracker/dev/plaid_secret",
+            "PLAID_ENV_PATH": "/wealthtracker/dev/plaid_env",
+            "PLAID_PRODUCTS_PATH": "/wealthtracker/dev/plaid_products",
+            "PLAID_COUNTRY_CODES_PATH": "/wealthtracker/dev/plaid_country_codes"
           }
         },
         "Role": {
@@ -296,7 +330,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1620961818797-2021-05-14T03:10:18.797Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
         },
         "Handler": "src/functions/plaid/createLinkToken/handler.main",
         "Runtime": "nodejs14.x",
@@ -305,14 +339,18 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "USER_TABLE": "wealthtracker-user-dev",
+            "ITEMS_TABLE_PLAID_SANDBOX": "wealthtracker-items-plaid_sandbox-dev",
+            "ITEMS_TABLE_PLAID_DEVELOPMENT": "wealthtracker-items-plaid_development-dev",
+            "ITEMS_TABLE_PLAID_PRODUCTION": "wealthtracker-items-plaid_production-dev",
+            "REGION": "us-east-2",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "DYNAMODB_USER_TABLE": "wealthtracker-user-dev",
-            "DYNAMODB_USER_TABLE_REGION": "us-east-2",
-            "PLAID_ENV": "sandbox",
-            "PLAID_CLIENT_ID": "5e24db63dad2b80015cc8eec",
-            "PLAID_SECRET": "5cbb69cb7c17a7386b947cf6ca88c0",
-            "PLAID_PRODUCTS": "auth,transactions,investments",
-            "PLAID_COUNTRY_CODES": "US"
+            "PARAMETERS_PATH": "/wealthtracker/dev",
+            "PLAID_CLIENT_ID_PATH": "/wealthtracker/dev/plaid_client_id",
+            "PLAID_SECRET_PATH": "/wealthtracker/dev/plaid_secret",
+            "PLAID_ENV_PATH": "/wealthtracker/dev/plaid_env",
+            "PLAID_PRODUCTS_PATH": "/wealthtracker/dev/plaid_products",
+            "PLAID_COUNTRY_CODES_PATH": "/wealthtracker/dev/plaid_country_codes"
           }
         },
         "Role": {
@@ -333,7 +371,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1620961818797-2021-05-14T03:10:18.797Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
         },
         "Handler": "src/functions/plaid/exchangePublicToken/handler.main",
         "Runtime": "nodejs14.x",
@@ -342,14 +380,18 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "USER_TABLE": "wealthtracker-user-dev",
+            "ITEMS_TABLE_PLAID_SANDBOX": "wealthtracker-items-plaid_sandbox-dev",
+            "ITEMS_TABLE_PLAID_DEVELOPMENT": "wealthtracker-items-plaid_development-dev",
+            "ITEMS_TABLE_PLAID_PRODUCTION": "wealthtracker-items-plaid_production-dev",
+            "REGION": "us-east-2",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "DYNAMODB_USER_TABLE": "wealthtracker-user-dev",
-            "DYNAMODB_USER_TABLE_REGION": "us-east-2",
-            "PLAID_ENV": "sandbox",
-            "PLAID_CLIENT_ID": "5e24db63dad2b80015cc8eec",
-            "PLAID_SECRET": "5cbb69cb7c17a7386b947cf6ca88c0",
-            "PLAID_PRODUCTS": "auth,transactions,investments",
-            "PLAID_COUNTRY_CODES": "US"
+            "PARAMETERS_PATH": "/wealthtracker/dev",
+            "PLAID_CLIENT_ID_PATH": "/wealthtracker/dev/plaid_client_id",
+            "PLAID_SECRET_PATH": "/wealthtracker/dev/plaid_secret",
+            "PLAID_ENV_PATH": "/wealthtracker/dev/plaid_env",
+            "PLAID_PRODUCTS_PATH": "/wealthtracker/dev/plaid_products",
+            "PLAID_COUNTRY_CODES_PATH": "/wealthtracker/dev/plaid_country_codes"
           }
         },
         "Role": {
@@ -363,26 +405,34 @@
         "ExchangePublicTokenLogGroup"
       ]
     },
-    "AddAccountLambdaFunction": {
+    "AddItemLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1620961818797-2021-05-14T03:10:18.797Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
         },
-        "Handler": "src/functions/account/addAccount/handler.main",
+        "Handler": "src/functions/items/addItem/handler.main",
         "Runtime": "nodejs14.x",
-        "FunctionName": "wealthtracker-dev-addAccount",
+        "FunctionName": "wealthtracker-dev-addItem",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "USER_TABLE": "wealthtracker-user-dev",
-            "ACCOUNT_TABLE": "wealthtracker-account-dev",
-            "REGION": "us-east-2"
+            "ITEMS_TABLE_PLAID_SANDBOX": "wealthtracker-items-plaid_sandbox-dev",
+            "ITEMS_TABLE_PLAID_DEVELOPMENT": "wealthtracker-items-plaid_development-dev",
+            "ITEMS_TABLE_PLAID_PRODUCTION": "wealthtracker-items-plaid_production-dev",
+            "REGION": "us-east-2",
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "PARAMETERS_PATH": "/wealthtracker/dev",
+            "PLAID_CLIENT_ID_PATH": "/wealthtracker/dev/plaid_client_id",
+            "PLAID_SECRET_PATH": "/wealthtracker/dev/plaid_secret",
+            "PLAID_ENV_PATH": "/wealthtracker/dev/plaid_env",
+            "PLAID_PRODUCTS_PATH": "/wealthtracker/dev/plaid_products",
+            "PLAID_COUNTRY_CODES_PATH": "/wealthtracker/dev/plaid_country_codes"
           }
         },
         "Role": {
@@ -393,28 +443,37 @@
         }
       },
       "DependsOn": [
-        "AddAccountLogGroup"
+        "AddItemLogGroup"
       ]
     },
-    "GetAccountsLambdaFunction": {
+    "DeleteItemLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1620961818797-2021-05-14T03:10:18.797Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
         },
-        "Handler": "src/functions/account/getAccounts/handler.main",
+        "Handler": "src/functions/items/deleteItem/handler.main",
         "Runtime": "nodejs14.x",
-        "FunctionName": "wealthtracker-dev-getAccounts",
+        "FunctionName": "wealthtracker-dev-deleteItem",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "USER_TABLE": "wealthtracker-user-dev",
+            "ITEMS_TABLE_PLAID_SANDBOX": "wealthtracker-items-plaid_sandbox-dev",
+            "ITEMS_TABLE_PLAID_DEVELOPMENT": "wealthtracker-items-plaid_development-dev",
+            "ITEMS_TABLE_PLAID_PRODUCTION": "wealthtracker-items-plaid_production-dev",
+            "REGION": "us-east-2",
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "ACCOUNT_TABLE": "wealthtracker-account-dev",
-            "REGION": "us-east-2"
+            "PARAMETERS_PATH": "/wealthtracker/dev",
+            "PLAID_CLIENT_ID_PATH": "/wealthtracker/dev/plaid_client_id",
+            "PLAID_SECRET_PATH": "/wealthtracker/dev/plaid_secret",
+            "PLAID_ENV_PATH": "/wealthtracker/dev/plaid_env",
+            "PLAID_PRODUCTS_PATH": "/wealthtracker/dev/plaid_products",
+            "PLAID_COUNTRY_CODES_PATH": "/wealthtracker/dev/plaid_country_codes"
           }
         },
         "Role": {
@@ -425,77 +484,128 @@
         }
       },
       "DependsOn": [
-        "GetAccountsLogGroup"
+        "DeleteItemLogGroup"
       ]
     },
-    "GetUserLambdaVersionfpclngVi7iZ5f0BAvI9PtQueUJJrv2wwCllHuSAYQ5M": {
+    "GetItemsLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
+        },
+        "Handler": "src/functions/items/getItems/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "wealthtracker-dev-getItems",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "USER_TABLE": "wealthtracker-user-dev",
+            "ITEMS_TABLE_PLAID_SANDBOX": "wealthtracker-items-plaid_sandbox-dev",
+            "ITEMS_TABLE_PLAID_DEVELOPMENT": "wealthtracker-items-plaid_development-dev",
+            "ITEMS_TABLE_PLAID_PRODUCTION": "wealthtracker-items-plaid_production-dev",
+            "REGION": "us-east-2",
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "PARAMETERS_PATH": "/wealthtracker/dev",
+            "PLAID_CLIENT_ID_PATH": "/wealthtracker/dev/plaid_client_id",
+            "PLAID_SECRET_PATH": "/wealthtracker/dev/plaid_secret",
+            "PLAID_ENV_PATH": "/wealthtracker/dev/plaid_env",
+            "PLAID_PRODUCTS_PATH": "/wealthtracker/dev/plaid_products",
+            "PLAID_COUNTRY_CODES_PATH": "/wealthtracker/dev/plaid_country_codes"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetItemsLogGroup"
+      ]
+    },
+    "GetUserLambdaVersion89chDzdFnox5iE07i5iZ5k3GwER8603ioC5PbryF5aA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetUserLambdaFunction"
         },
-        "CodeSha256": "OL/9alG58EIoAl+yC9bOKeqz2JIXmMPYcpYdl5HW81Q="
+        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
       }
     },
-    "CreateUserOnSignUpLambdaVersionEaGADPtgyY3YGe8OkOdnaPeaUovnCDzO3j4JVuaeUo": {
+    "CreateUserOnSignUpLambdaVersion6NMVTcLqraApjXkNyZ4XpSr3FWVbVhXFTTs1RMsY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateUserOnSignUpLambdaFunction"
         },
-        "CodeSha256": "OL/9alG58EIoAl+yC9bOKeqz2JIXmMPYcpYdl5HW81Q="
+        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
       }
     },
-    "CompleteOnboardingLambdaVersionMSHTy6HYvo1mRdXfUzqI8HGG6txbRudzeCWp3QvF4Ic": {
+    "CompleteOnboardingLambdaVersionMKjXjMGiNlxOq311qf1NNtInSbKJUBFSgFu0lvKFk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CompleteOnboardingLambdaFunction"
         },
-        "CodeSha256": "OL/9alG58EIoAl+yC9bOKeqz2JIXmMPYcpYdl5HW81Q="
+        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
       }
     },
-    "CreateLinkTokenLambdaVersion1lCZBsrc0Jp8ffKHg2dSlqMgIgO62juOCChx3zsv4": {
+    "CreateLinkTokenLambdaVersion0dLshdjBhxcBDjdVgbI24gMAmPrRnR6wFV8wDmbVIA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateLinkTokenLambdaFunction"
         },
-        "CodeSha256": "OL/9alG58EIoAl+yC9bOKeqz2JIXmMPYcpYdl5HW81Q="
+        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
       }
     },
-    "ExchangePublicTokenLambdaVersionlW5YUeD2rAQ4Pw6VffD6DBFyX8QpCUvo1hzwGC4uOnU": {
+    "ExchangePublicTokenLambdaVersionCQ8BfTBzmBhQHljJpHDWgI8m9IC159ZHJoHtXO9wUS0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ExchangePublicTokenLambdaFunction"
         },
-        "CodeSha256": "OL/9alG58EIoAl+yC9bOKeqz2JIXmMPYcpYdl5HW81Q="
+        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
       }
     },
-    "AddAccountLambdaVersioniFwbiITVWoShRNDwjegleWV4YqIhEKU9kNxl0UkpHI": {
+    "AddItemLambdaVersioneNvF17VwAUE9uTbDkhPghH0uBkuXtloQwXSAVNxKI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "AddAccountLambdaFunction"
+          "Ref": "AddItemLambdaFunction"
         },
-        "CodeSha256": "OL/9alG58EIoAl+yC9bOKeqz2JIXmMPYcpYdl5HW81Q="
+        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
       }
     },
-    "GetAccountsLambdaVersionV0FBQEdWjdNNP8zHly0CPvZKBhVcnYx7WP4l1MwrbM": {
+    "DeleteItemLambdaVersionqoE0DweltxOH6fggzE7hf3EMsd8NY7cSN4pD0k": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "GetAccountsLambdaFunction"
+          "Ref": "DeleteItemLambdaFunction"
         },
-        "CodeSha256": "OL/9alG58EIoAl+yC9bOKeqz2JIXmMPYcpYdl5HW81Q="
+        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
+      }
+    },
+    "GetItemsLambdaVersionB6woknzY7Js7zvweaMnCOiHtf5X0FbcOjoCBqkRYfUU": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetItemsLambdaFunction"
+        },
+        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
       }
     },
     "ApiGatewayRestApi": {
@@ -628,7 +738,7 @@
         }
       }
     },
-    "ApiGatewayResourceAccount": {
+    "ApiGatewayResourceItem": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
         "ParentId": {
@@ -637,13 +747,13 @@
             "RootResourceId"
           ]
         },
-        "PathPart": "account",
+        "PathPart": "item",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
       }
     },
-    "ApiGatewayResourceAccounts": {
+    "ApiGatewayResourceItems": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
         "ParentId": {
@@ -652,7 +762,7 @@
             "RootResourceId"
           ]
         },
-        "PathPart": "accounts",
+        "PathPart": "items",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -838,7 +948,7 @@
         }
       }
     },
-    "ApiGatewayMethodAccountOptions": {
+    "ApiGatewayMethodItemOptions": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "AuthorizationType": "NONE",
@@ -867,7 +977,7 @@
               "ResponseParameters": {
                 "method.response.header.Access-Control-Allow-Origin": "'*'",
                 "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,POST'"
               },
               "ResponseTemplates": {
                 "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
@@ -876,14 +986,14 @@
           ]
         },
         "ResourceId": {
-          "Ref": "ApiGatewayResourceAccount"
+          "Ref": "ApiGatewayResourceItem"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
       }
     },
-    "ApiGatewayMethodAccountsOptions": {
+    "ApiGatewayMethodItemsOptions": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "AuthorizationType": "NONE",
@@ -921,7 +1031,7 @@
           ]
         },
         "ResourceId": {
-          "Ref": "ApiGatewayResourceAccounts"
+          "Ref": "ApiGatewayResourceItems"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -1112,13 +1222,13 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayMethodAccountPost": {
+    "ApiGatewayMethodItemPost": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "POST",
         "RequestParameters": {},
         "ResourceId": {
-          "Ref": "ApiGatewayResourceAccount"
+          "Ref": "ApiGatewayResourceItem"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -1146,7 +1256,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "AddAccountLambdaFunction",
+                    "AddItemLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -1158,13 +1268,59 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayMethodAccountsGet": {
+    "ApiGatewayMethodItemDelete": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "DELETE",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceItem"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "COGNITO_USER_POOLS",
+        "AuthorizerId": {
+          "Ref": "userPoolAuthorizer"
+        },
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "DeleteItemLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayMethodItemsGet": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "GET",
         "RequestParameters": {},
         "ResourceId": {
-          "Ref": "ApiGatewayResourceAccounts"
+          "Ref": "ApiGatewayResourceItems"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -1192,7 +1348,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "GetAccountsLambdaFunction",
+                    "GetItemsLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -1204,7 +1360,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1620961810211": {
+    "ApiGatewayDeployment1621217812029": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1217,14 +1373,15 @@
         "ApiGatewayMethodOnboardingCompleteOptions",
         "ApiGatewayMethodPlaidLinkTokenOptions",
         "ApiGatewayMethodPlaidItemPublictokenExchangeOptions",
-        "ApiGatewayMethodAccountOptions",
-        "ApiGatewayMethodAccountsOptions",
+        "ApiGatewayMethodItemOptions",
+        "ApiGatewayMethodItemsOptions",
         "ApiGatewayMethodUserGet",
         "ApiGatewayMethodOnboardingCompletePost",
         "ApiGatewayMethodPlaidLinkTokenGet",
         "ApiGatewayMethodPlaidItemPublictokenExchangePost",
-        "ApiGatewayMethodAccountPost",
-        "ApiGatewayMethodAccountsGet"
+        "ApiGatewayMethodItemPost",
+        "ApiGatewayMethodItemDelete",
+        "ApiGatewayMethodItemsGet"
       ]
     },
     "GetUserLambdaPermissionApiGateway": {
@@ -1375,12 +1532,12 @@
         }
       }
     },
-    "AddAccountLambdaPermissionApiGateway": {
+    "AddItemLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "AddAccountLambdaFunction",
+            "AddItemLambdaFunction",
             "Arn"
           ]
         },
@@ -1412,12 +1569,49 @@
         }
       }
     },
-    "GetAccountsLambdaPermissionApiGateway": {
+    "DeleteItemLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "GetAccountsLambdaFunction",
+            "DeleteItemLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetItemsLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetItemsLambdaFunction",
             "Arn"
           ]
         },
@@ -1554,13 +1748,13 @@
       },
       "DeletionPolicy": "Delete"
     },
-    "accountTable": {
+    "itemsTableSandbox": {
       "Type": "AWS::DynamoDB::Table",
       "Properties": {
-        "TableName": "wealthtracker-account-dev",
+        "TableName": "wealthtracker-items-plaid_sandbox-dev",
         "AttributeDefinitions": [
           {
-            "AttributeName": "accountId",
+            "AttributeName": "itemId",
             "AttributeType": "S"
           },
           {
@@ -1574,7 +1768,69 @@
             "KeyType": "HASH"
           },
           {
-            "AttributeName": "accountId",
+            "AttributeName": "itemId",
+            "KeyType": "RANGE"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 1,
+          "WriteCapacityUnits": 1
+        }
+      },
+      "DeletionPolicy": "Delete"
+    },
+    "itemsTableDevelopment": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "wealthtracker-items-plaid_development-dev",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "itemId",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "userId",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "userId",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "itemId",
+            "KeyType": "RANGE"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 1,
+          "WriteCapacityUnits": 1
+        }
+      },
+      "DeletionPolicy": "Delete"
+    },
+    "itemsTableProduction": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "wealthtracker-items-plaid_production-dev",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "itemId",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "userId",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "userId",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "itemId",
             "KeyType": "RANGE"
           }
         ],
@@ -1770,7 +2026,7 @@
     "GetUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetUserLambdaVersionfpclngVi7iZ5f0BAvI9PtQueUJJrv2wwCllHuSAYQ5M"
+        "Ref": "GetUserLambdaVersion89chDzdFnox5iE07i5iZ5k3GwER8603ioC5PbryF5aA"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-GetUserLambdaFunctionQualifiedArn"
@@ -1779,7 +2035,7 @@
     "CreateUserOnSignUpLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateUserOnSignUpLambdaVersionEaGADPtgyY3YGe8OkOdnaPeaUovnCDzO3j4JVuaeUo"
+        "Ref": "CreateUserOnSignUpLambdaVersion6NMVTcLqraApjXkNyZ4XpSr3FWVbVhXFTTs1RMsY"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-CreateUserOnSignUpLambdaFunctionQualifiedArn"
@@ -1788,7 +2044,7 @@
     "CompleteOnboardingLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CompleteOnboardingLambdaVersionMSHTy6HYvo1mRdXfUzqI8HGG6txbRudzeCWp3QvF4Ic"
+        "Ref": "CompleteOnboardingLambdaVersionMKjXjMGiNlxOq311qf1NNtInSbKJUBFSgFu0lvKFk"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-CompleteOnboardingLambdaFunctionQualifiedArn"
@@ -1797,7 +2053,7 @@
     "CreateLinkTokenLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateLinkTokenLambdaVersion1lCZBsrc0Jp8ffKHg2dSlqMgIgO62juOCChx3zsv4"
+        "Ref": "CreateLinkTokenLambdaVersion0dLshdjBhxcBDjdVgbI24gMAmPrRnR6wFV8wDmbVIA"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-CreateLinkTokenLambdaFunctionQualifiedArn"
@@ -1806,28 +2062,37 @@
     "ExchangePublicTokenLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ExchangePublicTokenLambdaVersionlW5YUeD2rAQ4Pw6VffD6DBFyX8QpCUvo1hzwGC4uOnU"
+        "Ref": "ExchangePublicTokenLambdaVersionCQ8BfTBzmBhQHljJpHDWgI8m9IC159ZHJoHtXO9wUS0"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-ExchangePublicTokenLambdaFunctionQualifiedArn"
       }
     },
-    "AddAccountLambdaFunctionQualifiedArn": {
+    "AddItemLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AddAccountLambdaVersioniFwbiITVWoShRNDwjegleWV4YqIhEKU9kNxl0UkpHI"
+        "Ref": "AddItemLambdaVersioneNvF17VwAUE9uTbDkhPghH0uBkuXtloQwXSAVNxKI"
       },
       "Export": {
-        "Name": "sls-wealthtracker-dev-AddAccountLambdaFunctionQualifiedArn"
+        "Name": "sls-wealthtracker-dev-AddItemLambdaFunctionQualifiedArn"
       }
     },
-    "GetAccountsLambdaFunctionQualifiedArn": {
+    "DeleteItemLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAccountsLambdaVersionV0FBQEdWjdNNP8zHly0CPvZKBhVcnYx7WP4l1MwrbM"
+        "Ref": "DeleteItemLambdaVersionqoE0DweltxOH6fggzE7hf3EMsd8NY7cSN4pD0k"
       },
       "Export": {
-        "Name": "sls-wealthtracker-dev-GetAccountsLambdaFunctionQualifiedArn"
+        "Name": "sls-wealthtracker-dev-DeleteItemLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetItemsLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetItemsLambdaVersionB6woknzY7Js7zvweaMnCOiHtf5X0FbcOjoCBqkRYfUU"
+      },
+      "Export": {
+        "Name": "sls-wealthtracker-dev-GetItemsLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {

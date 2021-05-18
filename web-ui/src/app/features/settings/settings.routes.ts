@@ -8,6 +8,11 @@ export const SETTINGS_ROUTES: Routes = [
     component: SettingsComponent,
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'accounts'
+      },
+      {
         path: 'accounts',
         component: AccountsPageComponent,
       }
