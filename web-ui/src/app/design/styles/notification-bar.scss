@@ -1,0 +1,13 @@
+.notification-bar {
+    border-left: 10px solid;
+    font-size: 0.85rem;
+    padding: 0.2rem 1rem;
+    border-color: $gray-600;
+}
+
+@each $color,
+$value in $theme-colors {
+    .notification-bar-#{$color} {
+        @include alert-variant(theme-color-level($color, $alert-bg-level), theme-color-level($color, $alert-border-level), theme-color-level($color, $alert-color-level));
+    }
+}

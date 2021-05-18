@@ -1,0 +1,17 @@
+<div class="container">
+    <div *ngIf="showItems">
+        <div class="d-flex justify-content-between">
+            <h4 class="mb-4">Accounts</h4>
+            <app-add-account-button></app-add-account-button>
+        </div>
+        <app-account-item-list [items]="items"></app-account-item-list>
+    </div>
+
+    <div *ngIf="fetchingItems">
+        Loading items...
+    </div>
+
+    <div *ngIf="errorLoadingItems">
+        <app-error-loading-accounts (tryAgain)="tryFetchingItemsAgain()"></app-error-loading-accounts>
+    </div>
+</div>

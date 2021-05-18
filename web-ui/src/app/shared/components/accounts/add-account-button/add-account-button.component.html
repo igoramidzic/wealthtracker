@@ -1,1 +1,1 @@
-<button pButton class="p-button-sm" [disabled]="!(plaidService.plaidLinkServiceAvailable$ | async)" (click)="plaidService.openPlaidLink()">Add Account</button>
+<button class="btn btn-primary btn-sm" [disabled]="!(plaidService.plaidLinkServiceAvailable$ | async)" (click)="plaidService.openPlaidLink()">Add Account</button>

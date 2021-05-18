@@ -38,6 +38,7 @@ export class LoginFormComponent implements OnInit {
     let password = this.loginForm.get('password').value;
 
     this.isLoading = true;
+    this.hasError = false;
     this.loginForm.disable();
     this.authService.setUserDetails(username, password);
     this.authService.signIn(username, password)

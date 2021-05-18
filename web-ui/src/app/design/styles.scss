@@ -1,3 +1,9 @@
+@import "./styles/variables";
+/* Importing Bootstrap SCSS file. */
+/* This needs to be imported AFTER variables */
+@import '~bootstrap/scss/bootstrap';
+
+@import "./styles/notification-bar";
 @import "./styles/types";
 
 // Roboto

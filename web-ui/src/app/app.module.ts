@@ -11,6 +11,7 @@ import Amplify from "aws-amplify";
 import awsconfig from "../aws-exports";
 import { WealthTrackerApiHttpInterceptor } from './core/interceptors/wealthtracker_api.interceptor';
 import { NgxPlaidLinkModule } from 'ngx-plaid-link';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 Amplify.configure(awsconfig);
 
@@ -26,7 +27,8 @@ Amplify.configure(awsconfig);
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxPlaidLinkModule
+    NgxPlaidLinkModule,
+    NgbModule
   ],
   providers: [
     {

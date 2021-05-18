@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { OnboardingOrchestrator } from '../../onboarding';
 import { OnboardingService } from '../../services/onboarding.service';
 
 @Component({
   selector: 'app-onboarding-page',
   templateUrl: './onboarding-page.component.html',
-  styleUrls: ['./onboarding-page.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./onboarding-page.component.scss']
 })
 export class OnboardingPageComponent implements OnInit {
 
@@ -16,7 +14,7 @@ export class OnboardingPageComponent implements OnInit {
   completing: boolean;
   onboardingO: OnboardingOrchestrator;
 
-  constructor(private onboardingService: OnboardingService, private messageService: MessageService) {
+  constructor(private onboardingService: OnboardingService) {
     this.completing = false;
     this.errorMessage = "";
     this.hasError = false;
@@ -44,8 +42,4 @@ export class OnboardingPageComponent implements OnInit {
     this.completing = false;
   }
 
-  message(): void {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
-
-  }
 }

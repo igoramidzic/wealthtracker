@@ -6,14 +6,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { MainNavbarComponent } from './components/navbar/main-navbar/main-navbar.component';
 import { ProgressBarComponent } from './components/loaders/progress-bar/progress-bar.component';
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { MessagesModule } from 'primeng/messages';
-import { MessageModule } from 'primeng/message';
-import { DividerModule } from 'primeng/divider';
-import { AlertNavbarComponent } from './components/navbar/alert-navbar/alert-navbar.component';
-import { FieldsetModule } from 'primeng/fieldset';
 import { AddAccountButtonComponent } from './components/accounts/add-account-button/add-account-button.component';
+import { NotificationBarComponent } from './components/notifications/notification-bar/notification-bar.component';
 
 @NgModule({
   imports: [
@@ -23,18 +17,12 @@ import { AddAccountButtonComponent } from './components/accounts/add-account-but
     ReactiveFormsModule,
     NgxSliderModule,
     AmplifyUIAngularModule,
-    ButtonModule,
-    InputTextModule,
-    MessagesModule,
-    MessageModule,
-    DividerModule,
-    FieldsetModule
   ],
   declarations: [
     MainNavbarComponent,
     ProgressBarComponent,
-    AlertNavbarComponent,
-    AddAccountButtonComponent
+    AddAccountButtonComponent,
+    NotificationBarComponent
   ],
   exports: [
     CommonModule,
@@ -44,14 +32,8 @@ import { AddAccountButtonComponent } from './components/accounts/add-account-but
     ProgressBarComponent,
     NgxSliderModule,
     AmplifyUIAngularModule,
-    ButtonModule,
-    InputTextModule,
-    MessagesModule,
-    MessageModule,
-    DividerModule,
-    AlertNavbarComponent,
-    FieldsetModule,
-    AddAccountButtonComponent
+    AddAccountButtonComponent,
+    NotificationBarComponent,
   ],
 })
 export class SharedModule { }

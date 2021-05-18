@@ -1,15 +1,17 @@
-<form class="p-d-flex p-flex-column p-ai-stretch" [formGroup]="loginForm" (submit)="onLogIn()">
-    <div class="p-field p-mb-3 p-d-flex p-flex-column p-ai-stretch">
-        <label for="email">Email</label>
-        <input class="p-inputtext p-inputtext-lg" id="email" name="email" type="email" formControlName="email">
+<form class="d-flex flex-column align-items-stretch" [formGroup]="loginForm" (submit)="onLogIn()">
+    <div class="form-group">
+        <label for="emailAddressInput">Email address</label>
+        <input type="email" class="form-control" id="emailAddressInput" formControlName="email">
     </div>
 
-    <div class="p-field p-mb-4 p-d-flex p-flex-column p-ai-stretch">
-        <label for="password">Password</label>
-        <input class="p-inputtext p-inputtext-lg" id="password" name="password" type="password" formControlName="password">
+    <div class="form-group">
+        <label for="passwordInput">Password</label>
+        <input type="password" class="form-control" id="passwordInput" formControlName="password">
     </div>
 
-    <p-message class="p-mb-4" severity="error" [text]="errorMessage" *ngIf="hasError"></p-message>
+    <div class="alert alert-danger" *ngIf="hasError">
+        {{errorMessage}}
+    </div>
 
-    <button pButton type="submit" class="p-button-primary p-d-block p-button-lg" [disabled]="disableButton">Login</button>
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="disableButton">Login</button>
 </form>

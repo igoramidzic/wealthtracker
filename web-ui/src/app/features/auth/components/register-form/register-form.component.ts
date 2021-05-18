@@ -45,6 +45,7 @@ export class RegisterFormComponent implements OnInit {
     this.authService.setUserDetails(username, password, name);
 
     this.isLoading = true;
+    this.hasError = false;
     this.registerForm.disable();
     this.authService.signUp(name, username, password).then(res => {
       this.authService.goToNextStep();
@@ -62,6 +63,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   handleSignUpError(code: AuthSignUpError, message: string): void {
+    console.log(code, message)
     switch (code) {
       case AuthSignUpError.UsernameExists:
         this.errorMessage = message;

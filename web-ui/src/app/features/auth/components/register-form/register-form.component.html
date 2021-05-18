@@ -1,21 +1,22 @@
-<form class="p-d-flex p-flex-column p-ai-stretch" [formGroup]="registerForm" (submit)="onRegister()">
-
-    <div class="p-field p-mb-3 p-d-flex p-flex-column p-ai-stretch">
-        <label for="name">Name</label>
-        <input class="p-inputtext p-inputtext-lg" id="name" name="name" type="text" formControlName="name">
+<form class="d-flex flex-column align-items-stretch" [formGroup]="registerForm" (submit)="onRegister()">
+    <div class="form-group">
+        <label for="nameInput">Name</label>
+        <input type="text" class="form-control" id="nameInput" formControlName="name">
     </div>
 
-    <div class="p-field p-mb-3 p-d-flex p-flex-column p-ai-stretch">
-        <label for="email">Email</label>
-        <input #email class="p-inputtext p-inputtext-lg" id="email" name="email" type="email" formControlName="email">
+    <div class="form-group">
+        <label for="emailAddressInput">Email address</label>
+        <input #email type="email" class="form-control" id="emailAddressInput" formControlName="email">
     </div>
 
-    <div class="p-field p-mb-4 p-d-flex p-flex-column p-ai-stretch">
-        <label for="password">Password</label>
-        <input class="p-inputtext p-inputtext-lg" id="password" name="password" type="password" formControlName="password">
+    <div class="form-group">
+        <label for="passwordInput">Password</label>
+        <input type="password" class="form-control" id="passwordInput" formControlName="password">
     </div>
 
-    <p-message class="p-mb-4" severity="error" [text]="errorMessage" *ngIf="hasError"></p-message>
+    <div class="alert alert-danger" *ngIf="hasError">
+        {{errorMessage}}
+    </div>
 
-    <button pButton type="submit" class="p-button-primary p-d-block p-button-lg" [disabled]="disableButton">Register</button>
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="disableButton">Register</button>
 </form>

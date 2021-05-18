@@ -1,0 +1,20 @@
+<ng-container *ngIf="sortedItems.length > 0; else elseTemplate">
+    <div class="card mb-4" *ngFor="let item of sortedItems">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <h4 class="mb-0">{{ item.institution.name }}</h4>
+            <app-item-delete-button [item]="item"></app-item-delete-button>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let account of item.accounts">
+                <div class="d-flex align-items-center">
+                    <h6 class="mb-0 mr-2">{{ account.name }}</h6>
+                    <span class="text-muted">**** {{ account.mask }}</span>
+                </div>
+                <span class="text-muted">{{ account.subtype }}</span>
+            </li>
+        </ul>
+    </div>
+</ng-container>
+<ng-template #elseTemplate>
+    <app-empty-accounts-list></app-empty-accounts-list>
+</ng-template>
