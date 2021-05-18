@@ -42,9 +42,4 @@ export class AccountsPageComponent implements OnInit {
   get showItems(): boolean {
     return this.items !== undefined && !this.errorLoadingItems && !this.fetchingItems;
   }
-
-  onAddedAccount(item: IItem): void {
-    console.log(item);
-    this.items.push(item);
-  }
 }

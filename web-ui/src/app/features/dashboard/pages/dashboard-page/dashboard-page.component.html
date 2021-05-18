@@ -1,4 +1,3 @@
-<div class="p-5">
-    <h3>Only working feature is Accounts, and its in development.</h3>
-    <a [routerLink]="['/'+PAGE_ROUTES_CONSTANTS.SETTINGS]">Settings</a>
+<div class="container-fluid py-4">
+    <app-accounts-list-view [items]="items" *ngIf="items"></app-accounts-list-view>
 </div>

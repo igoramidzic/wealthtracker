@@ -1,0 +1,37 @@
+<h5>Banking <small>{{ getTotalBalanceByTypes([EAccountType.DEPOSITORY, EAccountType.CREDIT]) | currency }}</small></h5>
+<div class="pl-4">
+    <h6>Cash & Checking <small>{{getTotalBalanceBySubtypes([EAccountSubtype.CHECKING, EAccountSubtype.MONEYMARKET]) | currency}}</small></h6>
+    <ul>
+        <li *ngFor="let account of getAccountsBySubtype([EAccountSubtype.CHECKING, EAccountSubtype.MONEYMARKET, EAccountSubtype.CD])">
+            {{ account.name }} - {{ account.balances.current | currency }}
+        </li>
+    </ul>
+    <h6>Credit <small>{{getTotalBalanceBySubtypes([EAccountSubtype.CREDITCARD]) | currency}}</small></h6>
+    <ul>
+        <li *ngFor="let account of getAccountsBySubtype([EAccountSubtype.CREDITCARD])">
+            {{ account.name }} - {{ account.balances.current | currency }}
+        </li>
+    </ul>
+    <h6>Savings <small>{{getTotalBalanceBySubtypes([EAccountSubtype.SAVINGS, EAccountSubtype.CD]) | currency}}</small></h6>
+    <ul>
+        <li *ngFor="let account of getAccountsBySubtype([EAccountSubtype.SAVINGS, EAccountSubtype.CD])">
+            {{ account.name }} - {{ account.balances.current | currency }}
+        </li>
+    </ul>
+</div>
+
+<!-- <h5>Investments <small>{{ getTotalBalanceByTypes([EAccountType.INVESTMENT]) | currency }}</small></h5>
+<div class="pl-4">
+    <h6>Brokerage <small>{{getTotalBalanceBySubtypes([EAccountSubtype.FOUR01K, EAccountSubtype.IRA]) | currency}}</small></h6>
+    <ul>
+        <li *ngFor="let account of getAccountsBySubtype([EAccountSubtype.CREDITCARD])">
+            {{ account.name }} - {{ account.balances.current | currency }}
+        </li>
+    </ul>
+    <h6>Retirement <small>{{getTotalBalanceBySubtypes([EAccountSubtype.CHECKING, EAccountSubtype.MONEYMARKET]) | currency}}</small></h6>
+    <ul>
+        <li *ngFor="let account of getAccountsBySubtype([EAccountSubtype.CHECKING, EAccountSubtype.MONEYMARKET, EAccountSubtype.CD])">
+            {{ account.name }} - {{ account.balances.current | currency }}
+        </li>
+    </ul>
+</div> -->

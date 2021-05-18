@@ -5,11 +5,13 @@ import { DASHBOARD_ROUTES } from './dashboard.routes';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AccountsListViewComponent } from './components/accounts-list-view/accounts-list-view.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    DashboardPageComponent
+    DashboardPageComponent,
+    AccountsListViewComponent
   ],
   imports: [
     CommonModule,

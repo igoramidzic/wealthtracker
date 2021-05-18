@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../../../environments/environment';
 import { PAGE_ROUTES_CONSTANTS } from '../../../../core/constants/page-routes';
+import { AccountsService } from '../../../../core/services/accounts/accounts.service';
+import { IItem } from '../../../../core/models/item';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -9,13 +10,20 @@ import { PAGE_ROUTES_CONSTANTS } from '../../../../core/constants/page-routes';
 })
 export class DashboardPageComponent implements OnInit {
 
-  environment = environment;
-
+  items: IItem[];
   PAGE_ROUTES_CONSTANTS = PAGE_ROUTES_CONSTANTS;
 
-  constructor() { }
+  constructor(private accountsService: AccountsService) { }
 
   ngOnInit(): void {
+    this.getInitialItems();
   }
 
+  async getInitialItems(): Promise<void> {
+    try {
+      this.items = await this.accountsService.getItems();
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
