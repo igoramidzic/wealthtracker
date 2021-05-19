@@ -8,8 +8,15 @@ export interface IAccount {
   mask: string;
   name: string;
   officialName: string;
-  subtype: EAccountSubtype;
+  subtype: EAccountDepositorySubtype | EAccountCreditSubtype | EAccountLoanSubtype | EAccountInvestmentSubtype;
   type: EAccountType;
+}
+
+export enum EAccountType {
+  DEPOSITORY = 'depository',
+  CREDIT = 'credit',
+  INVESTMENT = 'investment',
+  LOAN = 'loan'
 }
 
 export enum EAccountDepositorySubtype {
@@ -17,6 +24,7 @@ export enum EAccountDepositorySubtype {
   SAVINGS = 'savings',
   HSA = 'hsa',
   CD = 'cd',
+  MONEY_MARKET = 'money market',
   PAYPAL = 'paypal',
   PREPAID = 'prepaid',
   CASH_MANAGEMENT = 'cash management',
@@ -88,26 +96,4 @@ export enum EAccountInvestmentSubtype {
   VARIABLE_ANNUITY = 'variable annuity'
 }
 
-export enum EAccountSubtype {
-  CHECKING = 'checking',
-  SAVINGS = 'savings',
-  HSA = 'hsa',
-  CD = 'cd',
-  PAYPAL = 'paypal',
-  PREPAID = 'prepaid',
-  CASHMANAGEMENT = 'cash management',
-  EBT = 'ebt',
-  CREDITCARD = 'credit card',
-  MONEYMARKET = 'money market',
-  IRA = 'ira',
-  FOUR01K = '401k',
-  STUDENT = 'student',
-  MORTGAGE = 'mortgage'
-}
-
-export enum EAccountType {
-  DEPOSITORY = 'depository',
-  CREDIT = 'credit',
-  INVESTMENT = 'investment',
-  LOAN = 'loan'
-}
+export type TAccountSubtype = EAccountDepositorySubtype | EAccountCreditSubtype | EAccountLoanSubtype | EAccountInvestmentSubtype;

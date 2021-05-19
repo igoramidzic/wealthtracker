@@ -8,6 +8,7 @@ import { ProgressBarComponent } from './components/loaders/progress-bar/progress
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import { AddAccountButtonComponent } from './components/accounts/add-account-button/add-account-button.component';
 import { NotificationBarComponent } from './components/notifications/notification-bar/notification-bar.component';
+import { NgbAccordionModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -17,6 +18,8 @@ import { NotificationBarComponent } from './components/notifications/notificatio
     ReactiveFormsModule,
     NgxSliderModule,
     AmplifyUIAngularModule,
+    NgbAccordionModule,
+    NgbCollapseModule
   ],
   declarations: [
     MainNavbarComponent,
@@ -34,6 +37,8 @@ import { NotificationBarComponent } from './components/notifications/notificatio
     AmplifyUIAngularModule,
     AddAccountButtonComponent,
     NotificationBarComponent,
+    NgbAccordionModule,
+    NgbCollapseModule
   ],
 })
 export class SharedModule { }
