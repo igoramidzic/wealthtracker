@@ -24,9 +24,7 @@ export class AccountsListViewComponent implements OnInit {
 
   isCollapsed: boolean;
 
-  constructor(private accountsService: AccountsService) {
-
-  }
+  constructor(private accountsService: AccountsService) { }
 
   ngOnInit(): void {
     this.accountsService.items$.subscribe(items => {
@@ -94,6 +92,10 @@ export class AccountsListViewComponent implements OnInit {
         return -1 * account.balances.current;
       return account.balances.current;
     }).reduce((total, amount) => total + amount);
+  }
+
+  get isLoadingItems(): boolean {
+    return !this.items;
   }
 }
 
