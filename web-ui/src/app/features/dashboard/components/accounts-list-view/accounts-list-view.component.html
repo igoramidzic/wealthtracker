@@ -3,222 +3,35 @@
     <app-add-account-button></app-add-account-button>
 </div>
 
-<div class="px-3 pb-3 d-flex align-items-center justify-content-between">
-    <h5 class="mb-0">Net Worth</h5>
-    <h5 class="mb-0">{{ accountsHolder.balance | currency }}</h5>
-</div>
-
-<div *ngIf="accountsHolder && accountsHolder.bankingAccounts.allAccounts.accounts.length > 0">
-    <div class="px-3 py-2 d-flex align-items-center justify-content-between bg-info">
-        <h5 class="mb-0">Banking</h5>
-        <strong>{{accountsHolder.bankingAccounts.allAccounts.balance | currency }}</strong>
+<div>
+    <div class="px-3 pb-4 pt-2 d-flex align-items-center justify-content-between">
+        <h5 class="mb-0">Net Worth</h5>
+        <h5 class="mb-0">{{ accountsHolder.netWorth | currency }}</h5>
     </div>
-    <div class="p-3">
-        <div *ngIf="accountsHolder.bankingAccounts.cashAndCheckingAccounts.accounts.length > 0" class="mb-2">
-            <ul class="list-group list-group-flush">
-                <li class="p-2 list-group-item d-flex align-items-center justify-content-between bg-light">
-                    <h6 class="mb-0">Cash & Checking</h6>
-                    <small><strong>{{ accountsHolder.bankingAccounts.cashAndCheckingAccounts.balance | currency }}</strong></small>
-                </li>
-                <li class="p-2 list-group-item border-0" *ngFor="let account of accountsHolder.bankingAccounts.cashAndCheckingAccounts.accounts">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <small class="font-weight-bold">{{ account.name }}</small>
-                            <small class="text-muted">{{ account.subtype }}</small>
-                        </div>
-                        <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
-                    </div>
-                </li>
-            </ul>
+
+    <div *ngFor="let accountType of accountsHolder.accountTypes">
+        <div class="px-3 py-2 d-flex align-items-center justify-content-between bg-light">
+            <h5 class="mb-0">{{ accountType.title }}</h5>
+            <strong>{{ accountType.balance | currency }}</strong>
         </div>
-        <div *ngIf="accountsHolder.bankingAccounts.creditAccounts.accounts.length > 0" class="mb-3">
-            <ul class="list-group list-group-flush">
-                <li class="p-2 list-group-item d-flex align-items-center justify-content-between bg-light">
-                    <h6 class="mb-0">Credit</h6>
-                    <small><strong>{{ accountsHolder.bankingAccounts.creditAccounts.balance | currency }}</strong></small>
-                </li>
-                <li class="p-2 list-group-item border-0" *ngFor="let account of accountsHolder.bankingAccounts.creditAccounts.accounts">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <small class="font-weight-bold">{{ account.name }}</small>
-                            <small class="text-muted">{{ account.subtype }}</small>
+        <div class="px-3">
+            <div class="mb-2">
+                <ul class="list-group list-group-flush pt-2">
+                    <li class="px-2 py-1 list-group-item border-0" *ngFor="let account of accountType.accounts">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-column">
+                                <small class="font-weight-bold">{{ account.name }}</small>
+                                <small class="text-muted">{{ account.subtype }}</small>
+                            </div>
+                            <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
                         </div>
-                        <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div *ngIf="accountsHolder.bankingAccounts.savingsAccounts.accounts.length > 0" class="mb-2">
-            <ul class="list-group list-group-flush">
-                <li class="p-2 list-group-item d-flex align-items-center justify-content-between bg-light">
-                    <h6 class="mb-0">Savings</h6>
-                    <small><strong>{{ accountsHolder.bankingAccounts.savingsAccounts.balance | currency }}</strong></small>
-                </li>
-                <li class="p-2 list-group-item border-0" *ngFor="let account of accountsHolder.bankingAccounts.savingsAccounts.accounts">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <small class="font-weight-bold">{{ account.name }}</small>
-                            <small class="text-muted">{{ account.subtype }}</small>
-                        </div>
-                        <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div *ngIf="accountsHolder.bankingAccounts.otherAccounts.accounts.length > 0" class="mb-2">
-            <ul class="list-group list-group-flush">
-                <li class="p-2 list-group-item d-flex align-items-center justify-content-between bg-light">
-                    <h6 class="mb-0">Other</h6>
-                    <small><strong>{{ accountsHolder.bankingAccounts.otherAccounts.balance | currency }}</strong></small>
-                </li>
-                <li class="p-2 list-group-item border-0" *ngFor="let account of accountsHolder.bankingAccounts.otherAccounts.accounts">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <small class="font-weight-bold">{{ account.name }}</small>
-                            <small class="text-muted">{{ account.subtype }}</small>
-                        </div>
-                        <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 
-
-<div *ngIf="accountsHolder && accountsHolder.loanAccounts.allAccounts.accounts.length > 0">
-    <div class="px-3 py-2  d-flex align-items-center justify-content-between bg-info">
-        <h5 class="mb-0">Loans</h5>
-        <strong>{{accountsHolder.loanAccounts.allAccounts.balance | currency }}</strong>
-    </div>
-    <div class="p-3">
-        <div *ngIf="accountsHolder.loanAccounts.mortgageAccounts.accounts.length > 0" class="mb-2">
-            <ul class="list-group list-group-flush">
-                <li class="p-2 list-group-item d-flex align-items-center justify-content-between bg-light">
-                    <h6 class="mb-0">Mortgages</h6>
-                    <small><strong>{{ accountsHolder.loanAccounts.mortgageAccounts.balance | currency }}</strong></small>
-                </li>
-                <li class="p-2 list-group-item border-0" *ngFor="let account of accountsHolder.loanAccounts.mortgageAccounts.accounts">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <small class="font-weight-bold">{{ account.name }}</small>
-                            <small class="text-muted">{{ account.subtype }}</small>
-                        </div>
-                        <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div *ngIf="accountsHolder.loanAccounts.autoAccounts.accounts.length > 0" class="mb-3">
-            <ul class="list-group list-group-flush">
-                <li class="p-2 list-group-item d-flex align-items-center justify-content-between bg-light">
-                    <h6 class="mb-0">Auto</h6>
-                    <small><strong>{{ accountsHolder.loanAccounts.autoAccounts.balance | currency }}</strong></small>
-                </li>
-                <li class="p-2 list-group-item border-0" *ngFor="let account of accountsHolder.loanAccounts.autoAccounts.accounts">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <small class="font-weight-bold">{{ account.name }}</small>
-                            <small class="text-muted">{{ account.subtype }}</small>
-                        </div>
-                        <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div *ngIf="accountsHolder.loanAccounts.studentAccounts.accounts.length > 0" class="mb-2">
-            <ul class="list-group list-group-flush">
-                <li class="p-2 list-group-item d-flex align-items-center justify-content-between bg-light">
-                    <h6 class="mb-0">Student</h6>
-                    <small><strong>{{ accountsHolder.loanAccounts.studentAccounts.balance | currency }}</strong></small>
-                </li>
-                <li class="p-2 list-group-item border-0" *ngFor="let account of accountsHolder.loanAccounts.studentAccounts.accounts">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <small class="font-weight-bold">{{ account.name }}</small>
-                            <small class="text-muted">{{ account.subtype }}</small>
-                        </div>
-                        <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div *ngIf="accountsHolder.loanAccounts.otherAccounts.accounts.length > 0" class="mb-2">
-            <ul class="list-group list-group-flush">
-                <li class="p-2 list-group-item d-flex align-items-center justify-content-between bg-light">
-                    <h6 class="mb-0">Other</h6>
-                    <small><strong>{{ accountsHolder.loanAccounts.otherAccounts.balance | currency }}</strong></small>
-                </li>
-                <li class="p-2 list-group-item border-0" *ngFor="let account of accountsHolder.loanAccounts.otherAccounts.accounts">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <small class="font-weight-bold">{{ account.name }}</small>
-                            <small class="text-muted">{{ account.subtype }}</small>
-                        </div>
-                        <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<div *ngIf="accountsHolder && accountsHolder.investmentAccounts.allAccounts.accounts.length > 0">
-    <div class="px-3 py-2 d-flex align-items-center justify-content-between bg-info">
-        <h5 class="mb-0">Investments</h5>
-        <strong>{{accountsHolder.investmentAccounts.allAccounts.balance | currency }}</strong>
-    </div>
-    <div class="p-3">
-        <div *ngIf="accountsHolder.investmentAccounts.brokerageAccounts.accounts.length > 0" class="mb-2">
-            <ul class="list-group list-group-flush">
-                <li class="p-2 list-group-item d-flex align-items-center justify-content-between bg-light">
-                    <h6 class="mb-0">Brokerages</h6>
-                    <small><strong>{{ accountsHolder.investmentAccounts.brokerageAccounts.balance | currency }}</strong></small>
-                </li>
-                <li class="p-2 list-group-item border-0" *ngFor="let account of accountsHolder.investmentAccounts.brokerageAccounts.accounts">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <small class="font-weight-bold">{{ account.name }}</small>
-                            <small class="text-muted">{{ account.subtype }}</small>
-                        </div>
-                        <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div *ngIf="accountsHolder.investmentAccounts.retirementAccounts.accounts.length > 0" class="mb-3">
-            <ul class="list-group list-group-flush">
-                <li class="p-2 list-group-item d-flex align-items-center justify-content-between bg-light">
-                    <h6 class="mb-0">Retirement</h6>
-                    <small><strong>{{ accountsHolder.investmentAccounts.retirementAccounts.balance | currency }}</strong></small>
-                </li>
-                <li class="p-2 list-group-item border-0" *ngFor="let account of accountsHolder.investmentAccounts.retirementAccounts.accounts">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <small class="font-weight-bold">{{ account.name }}</small>
-                            <small class="text-muted">{{ account.subtype }}</small>
-                        </div>
-                        <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div *ngIf="accountsHolder.investmentAccounts.otherAccounts.accounts.length > 0">
-            <ul class="list-group list-group-flush">
-                <li class="p-2 list-group-item d-flex align-items-center justify-content-between bg-light">
-                    <h6 class="mb-0">Other</h6>
-                    <small><strong>{{ accountsHolder.investmentAccounts.otherAccounts.balance | currency }}</strong></small>
-                </li>
-                <li class="p-2 list-group-item border-0" *ngFor="let account of accountsHolder.investmentAccounts.otherAccounts.accounts">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <small class="font-weight-bold">{{ account.name }}</small>
-                            <small class="text-muted">{{ account.subtype }}</small>
-                        </div>
-                        <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+<!-- <div *ngIf="accountsHolder?.accounts.length == 0">
+    <div class="alert alert-info">Add your first account!</div>
+</div> -->
