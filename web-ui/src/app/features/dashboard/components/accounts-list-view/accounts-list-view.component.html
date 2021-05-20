@@ -1,12 +1,12 @@
-<div class="d-flex align-items-center justify-content-between">
+<div class="pb-4 d-flex align-items-center justify-content-between">
     <h3 class="mb-0">Accounts</h3>
     <app-add-account-button></app-add-account-button>
 </div>
 
-<div *ngIf="!isLoadingItems && items?.length > 0">
-    <div class="pb-4 pt-2 d-flex align-items-center justify-content-between">
+<div *ngIf="!!accountsHolder">
+    <div class="pb-4 d-flex align-items-center justify-content-between">
         <h5 class="mb-0">Net Worth</h5>
-        <h5 class="mb-0">{{ accountsHolder.netWorth | currency }}</h5>
+        <h5 class="mb-0">{{ accountsHolder?.netWorth | currency }}</h5>
     </div>
 
     <div *ngFor="let accountType of accountsHolder.accountTypes">
@@ -21,7 +21,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="d-flex flex-column">
                                 <small class="font-weight-bold">{{ account.name }}</small>
-                                <small class="text-muted">{{ account.subtype }}</small>
+                                <small class="text-muted">{{ getReadableAccountSubType(account.subtype) }}</small>
                             </div>
                             <small class="font-weight-bold">{{ account.balances.current | currency }}</small>
                         </div>
@@ -33,7 +33,7 @@
 </div>
 
 <div class="" *ngIf="isLoadingItems">
-
+    Loading items
 </div>
 
 <div class="" *ngIf="items?.length == 0">

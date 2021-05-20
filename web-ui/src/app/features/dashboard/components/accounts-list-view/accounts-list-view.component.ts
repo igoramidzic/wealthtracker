@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IItem } from '../../../../core/models/item';
-import { EAccountType, IAccount, EAccountDepositorySubtype, EAccountCreditSubtype, EAccountLoanSubtype, EAccountInvestmentSubtype } from '../../../../core/models/account';
+import { EAccountType, IAccount, EAccountDepositorySubtype, EAccountCreditSubtype, EAccountLoanSubtype, EAccountInvestmentSubtype, readableAccountSubType, TAccountSubtype } from '../../../../core/models/account';
 import { AccountsService } from '../../../../core/services/accounts/accounts.service';
 
 @Component({
@@ -20,30 +20,36 @@ export class AccountsListViewComponent implements OnInit {
   EAccountLoanSubtype = EAccountLoanSubtype;
   EAccountInvestmentSubtype = EAccountInvestmentSubtype;
 
+
   cashAndCheckingSubTypes: (EAccountDepositorySubtype | EAccountCreditSubtype)[];
 
   isCollapsed: boolean;
 
-  constructor(private accountsService: AccountsService) { }
+  constructor(private accountsService: AccountsService) {
+  }
 
   ngOnInit(): void {
     this.accountsService.items$.subscribe(items => {
       this.items = items;
-      let accounts: IAccount[] = this.getAccountsCombinedFromAllItems(this.items);
-      console.log(accounts);
-      this.breakApartAndCalculateDifferentGroupsOfAccounts(accounts);
+      this.breakApartAndCalculateDifferentGroupsOfAccounts(items);
     });
     if (!this.accountsService.items)
       this.accountsService.getItems()
         .then()
         .catch(e => console.log(e));
+    else {
+      this.items = this.accountsService.items;
+      this.breakApartAndCalculateDifferentGroupsOfAccounts(this.items);
+    }
   }
 
   getAccountsCombinedFromAllItems(items: IItem[]): IAccount[] {
     return [].concat.apply([], items.map(item => item.accounts));
   }
 
-  breakApartAndCalculateDifferentGroupsOfAccounts(accounts: IAccount[]): void {
+  breakApartAndCalculateDifferentGroupsOfAccounts(items: IItem[]): void {
+    let accounts: IAccount[] = this.getAccountsCombinedFromAllItems(items);
+
     let cashAccounts = this.filterAccountsByType(accounts, [EAccountType.DEPOSITORY]);
     let creditAccounts = this.filterAccountsByType(accounts, [EAccountType.CREDIT]);
     let loanAccounts = this.filterAccountsByType(accounts, [EAccountType.LOAN]);
@@ -96,6 +102,10 @@ export class AccountsListViewComponent implements OnInit {
 
   get isLoadingItems(): boolean {
     return !this.items;
+  }
+
+  getReadableAccountSubType(subtype: TAccountSubtype): string {
+    return readableAccountSubType(subtype);
   }
 }
 

@@ -97,3 +97,79 @@ export enum EAccountInvestmentSubtype {
 }
 
 export type TAccountSubtype = EAccountDepositorySubtype | EAccountCreditSubtype | EAccountLoanSubtype | EAccountInvestmentSubtype;
+
+export const readableAccountSubType = (subtype: TAccountSubtype): string => {
+  switch (subtype) {
+    case EAccountDepositorySubtype.CHECKING:
+      return "Checking";
+    case EAccountDepositorySubtype.MONEY_MARKET:
+      return "Money Market";
+    case EAccountDepositorySubtype.SAVINGS:
+      return "Savings";
+    case EAccountDepositorySubtype.PAYPAL:
+      return "PayPal";
+    case EAccountDepositorySubtype.CASH_MANAGEMENT:
+      return "Cash Management";
+    case EAccountDepositorySubtype.CD:
+      return "CD";
+    case EAccountDepositorySubtype.EBT:
+      return "EBT";
+    case EAccountDepositorySubtype.HSA:
+      return "HSA";
+    case EAccountDepositorySubtype.PREPAID:
+      return "Prepaid";
+
+    case EAccountCreditSubtype.PAYPAL:
+      return "PayPal";
+    case EAccountCreditSubtype.CREDIT_CARD:
+      return "Credit Card";
+
+    case EAccountLoanSubtype.AUTO:
+      return "Auto";
+    case EAccountLoanSubtype.BUSINESS:
+      return "Business";
+    case EAccountLoanSubtype.COMMERCIAL:
+      return "Commercial";
+    case EAccountLoanSubtype.CONSUMER:
+      return "Consumer";
+    case EAccountLoanSubtype.HOME_EQUITY:
+      return "Home Equity";
+    case EAccountLoanSubtype.LINE_OF_CREDIT:
+      return "Line of Credit";
+    case EAccountLoanSubtype.LOAN:
+      return "Loan";
+    case EAccountLoanSubtype.MORTGAGE:
+      return "Mortgage";
+    case EAccountLoanSubtype.OTHER:
+      return "Other";
+    case EAccountLoanSubtype.OVERDRAFT:
+      return "Overdraft";
+    case EAccountLoanSubtype.STUDENT:
+      return "Student";
+
+    case EAccountInvestmentSubtype.BROKERAGE:
+      return "Brokerage";
+    case EAccountInvestmentSubtype.FOUR01k:
+      return "401K";
+    case EAccountInvestmentSubtype.HSA:
+      return "HSA";
+    case EAccountInvestmentSubtype.IRA:
+      return "IRA";
+    case EAccountInvestmentSubtype.MUTUAL_FUND:
+      return "Mutual Fund";
+    case EAccountInvestmentSubtype.NONTAXABLE_BROKERAGE_ACCOUNT:
+      return "Non-Taxable Brokerage";
+    case EAccountInvestmentSubtype.RETIREMENT:
+      return "Retirement";
+    case EAccountInvestmentSubtype.ROTH:
+      return "Roth";
+    case EAccountInvestmentSubtype.ROTH_401K:
+      return "Roth 401K";
+    case EAccountInvestmentSubtype.SIMPLE_IRA:
+      return "Simple IRA";
+    case EAccountInvestmentSubtype.TRUST:
+      return "Trust";
+    default:
+      return subtype;
+  }
+}
