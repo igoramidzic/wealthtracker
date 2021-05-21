@@ -33,10 +33,11 @@ export class AccountsListViewComponent implements OnInit {
       this.items = items;
       this.breakApartAndCalculateDifferentGroupsOfAccounts(items);
     });
-    if (!this.accountsService.items)
+    if (!this.accountsService.items) {
       this.accountsService.getItems()
         .then()
         .catch(e => console.log(e));
+    }
     else {
       this.items = this.accountsService.items;
       this.breakApartAndCalculateDifferentGroupsOfAccounts(this.items);
@@ -49,7 +50,10 @@ export class AccountsListViewComponent implements OnInit {
 
   breakApartAndCalculateDifferentGroupsOfAccounts(items: IItem[]): void {
     let accounts: IAccount[] = this.getAccountsCombinedFromAllItems(items);
-    if (accounts.length == 0) return;
+    if (accounts.length == 0) {
+      this.accountsHolder = null;
+      return;
+    }
 
     let cashAccounts = this.filterAccountsByType(accounts, [EAccountType.DEPOSITORY]);
     let creditAccounts = this.filterAccountsByType(accounts, [EAccountType.CREDIT]);
