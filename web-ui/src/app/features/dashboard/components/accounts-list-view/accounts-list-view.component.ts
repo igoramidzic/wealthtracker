@@ -49,6 +49,7 @@ export class AccountsListViewComponent implements OnInit {
 
   breakApartAndCalculateDifferentGroupsOfAccounts(items: IItem[]): void {
     let accounts: IAccount[] = this.getAccountsCombinedFromAllItems(items);
+    if (accounts.length == 0) return;
 
     let cashAccounts = this.filterAccountsByType(accounts, [EAccountType.DEPOSITORY]);
     let creditAccounts = this.filterAccountsByType(accounts, [EAccountType.CREDIT]);

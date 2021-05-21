@@ -1,0 +1,28 @@
+<div class="d-flex flex-column justify-content-between h-100 shadow" style="width: 3.5rem;">
+    <div class="list-group list-group-flush border-bottom scrollarea">
+        <a [routerLink]="['/']" class="list-group-item list-group-item-action px-1 py-3 lh-tight nav-item" aria-current="true">
+            WT
+        </a>
+        <a [routerLink]="['/dashboard']" [routerLinkActive]="['active']" class="nav-item list-group-item list-group-item-action px-1 py-2 lh-tight" aria-current="true">
+            <i class="fas fa-chart-bar"></i>
+        </a>
+    </div>
+    <div class="list-group list-group-flush scrollarea py-3">
+        <a [routerLink]="['/settings']" [routerLinkActive]="['active']" class="nav-item list-group-item list-group-item-action px-1 py-2 lh-tight border-bottom-0" aria-current="true">
+            <i class="fas fa-cog"></i>
+        </a>
+
+        <div class="btn-group dropup">
+            <button type="button" class="nav-item list-group-item list-group-item-action px-1 py-2 lh-tight border-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user-circle"></i>
+            </button>
+            <div class="dropdown-menu">
+                <div class="list-group list-group-flush">
+                    <button class="list-group-item list-group-item-action" (click)="auth.signOut()">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

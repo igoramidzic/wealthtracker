@@ -9,6 +9,8 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import { AddAccountButtonComponent } from './components/accounts/add-account-button/add-account-button.component';
 import { NotificationBarComponent } from './components/notifications/notification-bar/notification-bar.component';
 import { NgbAccordionModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { SideNavbarComponent } from './components/navbar/side-navbar/side-navbar.component';
+import { ContentLayoutComponent } from './layouts/content-layout/content-layout.component';
 
 @NgModule({
   imports: [
@@ -25,7 +27,9 @@ import { NgbAccordionModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstra
     MainNavbarComponent,
     ProgressBarComponent,
     AddAccountButtonComponent,
-    NotificationBarComponent
+    NotificationBarComponent,
+    SideNavbarComponent,
+    ContentLayoutComponent
   ],
   exports: [
     CommonModule,
@@ -38,7 +42,8 @@ import { NgbAccordionModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstra
     AddAccountButtonComponent,
     NotificationBarComponent,
     NgbAccordionModule,
-    NgbCollapseModule
+    NgbCollapseModule,
+    SideNavbarComponent
   ],
 })
 export class SharedModule { }

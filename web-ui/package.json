@@ -27,6 +27,7 @@
     "@angular/router": "~11.2.12",
     "@aws-amplify/auth": "^3.4.30",
     "@aws-amplify/ui-angular": "^1.0.7",
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "@ng-bootstrap/ng-bootstrap": "^9.1.1",
     "aws-amplify": "^3.3.27",
     "bootstrap": "^4.6.0",

@@ -7,6 +7,7 @@ import { OnboardingIncompleteGuard } from './core/guards/onboarding-incomplete/o
 import { OnboardingCompleteGuard } from './core/guards/onboarding-complete/onboarding-complete.guard';
 import { OopsGuard } from './core/guards/oops/oops.guard';
 import { UserGuard } from './core/guards/user/user.guard';
+import { ContentLayoutComponent } from './shared/layouts/content-layout/content-layout.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
   },
   {
     path: '',
+    component: ContentLayoutComponent,
     canActivate: [AuthGuard],
     children: [
       {
