@@ -9,7 +9,7 @@ export const environment: IEnvironment = {
   wealthtracker_api_url: 'https://jkjfx8zlc5.execute-api.us-east-2.amazonaws.com/dev',
   plaid: {
     client_id: "5e24db63dad2b80015cc8eec",
-    environment: EPlaidEnvironment.DEVELOPMENT,
+    environment: EPlaidEnvironment.SANDBOX,
     apiVersion: "v2",
     clientName: "",
     countryCodes: ["US"],
