@@ -21,6 +21,7 @@ const ssm = new aws.SSM();
 const getBalances: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event, context) => {
   let userId = event.requestContext.authorizer.claims.sub;
 
+  console.log(1);
   let parameters: Parameter[];
   try {
     let res = await ssm.getParametersByPath({ Path: process.env.PARAMETERS_PATH }).promise();
@@ -30,9 +31,12 @@ const getBalances: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (ev
     return formatJSONResponse(500, null);
   }
 
+  console.log(2);
   const itemsTableName = getItemsTableName(<EPlaidEnvironment>getParameterValue(parameters, process.env.PLAID_ENV_PATH));
 
   let itemId: string = <string>(event.body.itemId);
+  if (!itemId || typeof itemId != "string")
+    return formatJSONResponse(400, { error: 'Invalid itemId provided' });
 
   let item: IItem;
   try {
@@ -43,12 +47,15 @@ const getBalances: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (ev
         itemId
       }
     };
+    console.log(ddbParams);
 
     let res = await ddb.get(ddbParams).promise();
     item = <IItem>({ ...res.Item });
+    console.log(4);
     if (!res.Item == null)
       return formatJSONResponse(500, null);
   } catch (e) {
+    console.log(5);
     console.log(e);
     return formatJSONResponse(500, null);
   }
@@ -62,9 +69,11 @@ const getBalances: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (ev
   let accounts: Account[];
   try {
     let res = await plaidClient.getBalance(item.accessToken);
+    console.log(6);
     accounts = res.accounts;
   } catch (e) {
     console.log(e);
+    console.log(7);
     return formatJSONResponse(500, null);
   }
 
@@ -98,6 +107,8 @@ const getBalances: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (ev
     },
     ReturnValues: "UPDATED_NEW"
   };
+
+  console.log(params);
 
   try {
     await ddb.update(params).promise();

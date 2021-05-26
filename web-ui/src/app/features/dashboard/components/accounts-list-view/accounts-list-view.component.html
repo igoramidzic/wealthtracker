@@ -11,7 +11,6 @@
         <h5 class="mb-0">Net Worth</h5>
         <h5 class="mb-0">{{ accountsHolder?.netWorth | currency }}</h5>
     </div>
-
     <div *ngFor="let accountType of accountsHolder.accountTypes">
         <div *ngIf="accountType.accounts.length > 0">
             <div class="mx-n3 px-3 py-2 d-flex align-items-center justify-content-between bg-light">
@@ -21,9 +20,18 @@
             <div class="pb-2">
                 <ul class="list-group list-group-flush pt-2">
                     <li class="px-2 py-1 list-group-item border-0" *ngFor="let account of accountType.accounts">
+
                         <div class="d-flex justify-content-between">
                             <div class="d-flex flex-column">
-                                <small class="font-weight-bold">{{ account.name }}</small>
+                                <div class="d-flex align-items-center">
+                                    <small class="font-weight-bold">
+                                        {{ account.name }}
+                                        <span *ngIf="account.status == EItemStatus.FAILED_REFRESHING" class="failed-icon text-danger"><i class="ml-2 fas fa-times-circle"></i></span>
+                                    </small>
+                                    <div class="account-refresh-spinner spinner-border spinner-border-sm ml-2" role="status" *ngIf="account.status == EItemStatus.REFRESHING">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
                                 <small class="text-muted">{{ getReadableAccountSubType(account.subtype) }}</small>
                             </div>
                             <small class="font-weight-bold">{{ account.balances.current | currency }}</small>

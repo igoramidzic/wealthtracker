@@ -21,9 +21,8 @@ export class ItemDeleteButtonComponent implements OnInit {
 
   async onDeleteItem(): Promise<void> {
     this.isDeleting = true;
-    console.log(this.item)
     try {
-      let item = await this.accountsService.deleteItem(this.item.itemId);
+      await this.accountsService.deleteItem(this.item.itemId);
     } catch (e) {
       console.log(e);
     }

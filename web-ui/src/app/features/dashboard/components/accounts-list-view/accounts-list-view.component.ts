@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IItem } from '../../../../core/models/item';
+import { IItem, EItemStatus } from '../../../../core/models/item';
 import { EAccountType, IAccount, EAccountDepositorySubtype, EAccountCreditSubtype, EAccountLoanSubtype, EAccountInvestmentSubtype, readableAccountSubType, TAccountSubtype } from '../../../../core/models/account';
 import { AccountsService } from '../../../../core/services/accounts/accounts.service';
 
@@ -20,6 +20,7 @@ export class AccountsListViewComponent implements OnInit {
   EAccountLoanSubtype = EAccountLoanSubtype;
   EAccountInvestmentSubtype = EAccountInvestmentSubtype;
 
+  EItemStatus = EItemStatus;
 
   cashAndCheckingSubTypes: (EAccountDepositorySubtype | EAccountCreditSubtype)[];
 
@@ -33,6 +34,7 @@ export class AccountsListViewComponent implements OnInit {
       this.items = items;
       this.breakApartAndCalculateDifferentGroupsOfAccounts(items);
     });
+
     if (!this.accountsService.items) {
       this.accountsService.getItems()
         .then()

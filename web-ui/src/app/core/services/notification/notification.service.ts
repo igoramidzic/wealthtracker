@@ -17,6 +17,12 @@ export class NotificationService {
         subject: 'Sandbox mode:',
         message: 'user_good pass_good'
       })
+    } else if (environment.plaid.environment == EPlaidEnvironment.DEVELOPMENT) {
+      this.addNotification({
+        type: ENotificationType.INFO,
+        subject: 'Development mode:',
+        message: 'Use your real bank credentials'
+      })
     }
   }
 

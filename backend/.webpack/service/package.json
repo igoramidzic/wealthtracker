@@ -1,0 +1,14 @@
+{
+  "name": "wealthtracker",
+  "version": "1.0.0",
+  "description": "Packaged externals for wealthtracker",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "@middy/core": "^1.5.2",
+    "@middy/http-json-body-parser": "^1.5.2",
+    "aws-sdk": "^2.892.0",
+    "plaid": "^8.4.0",
+    "source-map-support": "^0.5.19"
+  }
+}

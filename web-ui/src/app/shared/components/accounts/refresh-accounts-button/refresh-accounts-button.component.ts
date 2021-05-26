@@ -14,8 +14,6 @@ export class RefreshAccountsButtonComponent implements OnInit {
   }
 
   refreshAccounts(): void {
-    this.accountsService.refreshAccounts()
-      .then(res => { })
-      .catch(err => { });
+    this.accountsService.refreshAccounts();
   }
 }

@@ -8,4 +8,11 @@ export interface IItem {
   accounts: IAccount[];
   institution: IInstitution;
   createdAt: string;
+  status?: EItemStatus;
+}
+
+export enum EItemStatus {
+  IDLE = 'Idle',
+  REFRESHING = 'Refreshing',
+  FAILED_REFRESHING = 'Failed Refreshing'
 }

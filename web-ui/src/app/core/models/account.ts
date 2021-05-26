@@ -1,3 +1,4 @@
+import { EItemStatus } from './item';
 export interface IAccount {
   accountId: string;
   balances: {
@@ -10,6 +11,7 @@ export interface IAccount {
   officialName: string;
   subtype: EAccountDepositorySubtype | EAccountCreditSubtype | EAccountLoanSubtype | EAccountInvestmentSubtype;
   type: EAccountType;
+  status: EItemStatus;
 }
 
 export enum EAccountType {

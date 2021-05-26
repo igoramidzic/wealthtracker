@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
-import { IItem } from '../../models/item';
+import { EItemStatus, IItem } from '../../models/item';
 import { Subject } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +15,49 @@ export class AccountsService {
   refreshingAccounts: boolean;
   refreshingAccounts$: Subject<boolean>;
 
-  constructor(private http: HttpClient, private toastr: ToastrService) {
+  constructor(private http: HttpClient) {
     this.items$ = new Subject();
     this.refreshingAccounts$ = new Subject();
   }
 
-  async refreshAccounts(): Promise<void> {
+  refreshAccounts(): void {
     this.refreshingAccounts = true;
     this.refreshingAccounts$.next(true);
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        this.toastr.info("Development in progress", "Account Refresh");
+
+    let promiseList: Promise<IItem>[] = [];
+
+    this.items.forEach(item => {
+      this.setItemStatus(item, EItemStatus.REFRESHING);
+
+      let promise = new Promise<IItem | null>((resolve, reject) => {
+        this.http.post<IItem>(environment.wealthtracker_api_url + '/item/balances/get', { itemId: item.itemId })
+          .subscribe(item => {
+            let itemIndex = this.items.findIndex(item2 => item2.itemId == item.itemId);
+            this.setItemStatus(item, EItemStatus.IDLE)
+            this.items[itemIndex] = item;
+            this.items$.next(this.items);
+            resolve(item);
+          }, err => {
+            this.setItemStatus(item, EItemStatus.FAILED_REFRESHING);
+            resolve(null);
+          })
+      })
+
+      promiseList.push(promise);
+    });
+
+    Promise.all(promiseList)
+      .then(() => { })
+      .catch(() => { })
+      .finally(() => {
         this.refreshingAccounts = false;
-        this.refreshingAccounts$.next(false);
-        resolve();
-      }, 1000);
-    })
+        this.refreshingAccounts$.next(this.refreshingAccounts);
+      })
+  }
+
+  private setItemStatus(item: IItem, status: EItemStatus): void {
+    item.status = status;
+    item.accounts.forEach(account => account.status = status);
   }
 
   async addItem(public_token: string): Promise<IItem> {
@@ -59,12 +85,13 @@ export class AccountsService {
       .pipe(
         tap(items => {
           this.items = items;
+          this.items.forEach(item => this.setItemStatus(item, EItemStatus.IDLE));
           this.items$.next(this.items);
         })
       ).toPromise();
   }
 
   get allowRefresh(): boolean {
-    return !this.refreshingAccounts && !!this.items;
+    return !this.refreshingAccounts && !!this.items && this.items.length > 0;
   }
 }
