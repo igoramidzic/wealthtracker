@@ -8,6 +8,7 @@ import exchangePublicToken from '@functions/plaid/exchangePublicToken';
 import addItem from '@functions/items/addItem';
 import deleteItem from '@functions/items/deleteItem';
 import getItems from '@functions/items/getItems';
+import getBalances from '@functions/items/getBalances';
 
 const serverlessConfiguration: AWS = {
   service: 'wealthtracker',
@@ -52,7 +53,7 @@ const serverlessConfiguration: AWS = {
   // import the function via paths
   functions: {
     getUser, createUserOnSignUp, completeOnboarding, createLinkToken, exchangePublicToken,
-    addItem, deleteItem, getItems
+    addItem, deleteItem, getItems, getBalances
   },
   useDotenv: true,
   resources: {

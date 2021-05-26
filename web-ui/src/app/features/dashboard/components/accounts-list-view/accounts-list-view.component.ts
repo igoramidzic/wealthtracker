@@ -54,6 +54,7 @@ export class AccountsListViewComponent implements OnInit {
       this.accountsHolder = null;
       return;
     }
+    accounts = this.sortAccountsBySubtypeAndName(accounts);
 
     let cashAccounts = this.filterAccountsByType(accounts, [EAccountType.DEPOSITORY]);
     let creditAccounts = this.filterAccountsByType(accounts, [EAccountType.CREDIT]);
@@ -111,6 +112,10 @@ export class AccountsListViewComponent implements OnInit {
 
   getReadableAccountSubType(subtype: TAccountSubtype): string {
     return readableAccountSubType(subtype);
+  }
+
+  sortAccountsBySubtypeAndName(accounts: IAccount[]): IAccount[] {
+    return accounts.sort((a, b) => a.subtype.localeCompare(b.subtype) || a.name.localeCompare(b.name));
   }
 }
 

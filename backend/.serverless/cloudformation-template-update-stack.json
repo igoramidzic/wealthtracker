@@ -119,6 +119,12 @@
         "LogGroupName": "/aws/lambda/wealthtracker-dev-getItems"
       }
     },
+    "GetBalancesLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/wealthtracker-dev-getBalances"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -207,7 +213,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621993027893-2021-05-26T01:37:07.893Z/wealthtracker.zip"
         },
         "Handler": "src/functions/user/getUser/handler.main",
         "Runtime": "nodejs14.x",
@@ -248,7 +254,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621993027893-2021-05-26T01:37:07.893Z/wealthtracker.zip"
         },
         "Handler": "src/functions/user/createUserOnSignUp/handler.main",
         "Runtime": "nodejs14.x",
@@ -289,7 +295,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621993027893-2021-05-26T01:37:07.893Z/wealthtracker.zip"
         },
         "Handler": "src/functions/onboarding/completeOnboarding/handler.main",
         "Runtime": "nodejs14.x",
@@ -330,7 +336,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621993027893-2021-05-26T01:37:07.893Z/wealthtracker.zip"
         },
         "Handler": "src/functions/plaid/createLinkToken/handler.main",
         "Runtime": "nodejs14.x",
@@ -371,7 +377,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621993027893-2021-05-26T01:37:07.893Z/wealthtracker.zip"
         },
         "Handler": "src/functions/plaid/exchangePublicToken/handler.main",
         "Runtime": "nodejs14.x",
@@ -412,7 +418,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621993027893-2021-05-26T01:37:07.893Z/wealthtracker.zip"
         },
         "Handler": "src/functions/items/addItem/handler.main",
         "Runtime": "nodejs14.x",
@@ -453,7 +459,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621993027893-2021-05-26T01:37:07.893Z/wealthtracker.zip"
         },
         "Handler": "src/functions/items/deleteItem/handler.main",
         "Runtime": "nodejs14.x",
@@ -494,7 +500,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/wealthtracker/dev/1621217822277-2021-05-17T02:17:02.277Z/wealthtracker.zip"
+          "S3Key": "serverless/wealthtracker/dev/1621993027893-2021-05-26T01:37:07.893Z/wealthtracker.zip"
         },
         "Handler": "src/functions/items/getItems/handler.main",
         "Runtime": "nodejs14.x",
@@ -528,84 +534,135 @@
         "GetItemsLogGroup"
       ]
     },
-    "GetUserLambdaVersion89chDzdFnox5iE07i5iZ5k3GwER8603ioC5PbryF5aA": {
+    "GetBalancesLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/wealthtracker/dev/1621993027893-2021-05-26T01:37:07.893Z/wealthtracker.zip"
+        },
+        "Handler": "src/functions/items/getBalances/handler.main",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "wealthtracker-dev-getBalances",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "USER_TABLE": "wealthtracker-user-dev",
+            "ITEMS_TABLE_PLAID_SANDBOX": "wealthtracker-items-plaid_sandbox-dev",
+            "ITEMS_TABLE_PLAID_DEVELOPMENT": "wealthtracker-items-plaid_development-dev",
+            "ITEMS_TABLE_PLAID_PRODUCTION": "wealthtracker-items-plaid_production-dev",
+            "REGION": "us-east-2",
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "PARAMETERS_PATH": "/wealthtracker/dev",
+            "PLAID_CLIENT_ID_PATH": "/wealthtracker/dev/plaid_client_id",
+            "PLAID_SECRET_PATH": "/wealthtracker/dev/plaid_secret",
+            "PLAID_ENV_PATH": "/wealthtracker/dev/plaid_env",
+            "PLAID_PRODUCTS_PATH": "/wealthtracker/dev/plaid_products",
+            "PLAID_COUNTRY_CODES_PATH": "/wealthtracker/dev/plaid_country_codes"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetBalancesLogGroup"
+      ]
+    },
+    "GetUserLambdaVersionyH51yTMCieWaF4LHcGWs44HqB6K56hano1Xcc7cQPA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetUserLambdaFunction"
         },
-        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
+        "CodeSha256": "BohlxtK4ObBRdHaZSwym8Yf77FbipPw5bXIpHbVYVJk="
       }
     },
-    "CreateUserOnSignUpLambdaVersion6NMVTcLqraApjXkNyZ4XpSr3FWVbVhXFTTs1RMsY": {
+    "CreateUserOnSignUpLambdaVersion5VsqGxpDzJHx4Y6JLF2aylbZaw9uiRPNc7NUXMOGY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateUserOnSignUpLambdaFunction"
         },
-        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
+        "CodeSha256": "BohlxtK4ObBRdHaZSwym8Yf77FbipPw5bXIpHbVYVJk="
       }
     },
-    "CompleteOnboardingLambdaVersionMKjXjMGiNlxOq311qf1NNtInSbKJUBFSgFu0lvKFk": {
+    "CompleteOnboardingLambdaVersionSQteZBX3N8CUsWhV3oAJ8rEXQQc8viMzfI14e3kO8Q": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CompleteOnboardingLambdaFunction"
         },
-        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
+        "CodeSha256": "BohlxtK4ObBRdHaZSwym8Yf77FbipPw5bXIpHbVYVJk="
       }
     },
-    "CreateLinkTokenLambdaVersion0dLshdjBhxcBDjdVgbI24gMAmPrRnR6wFV8wDmbVIA": {
+    "CreateLinkTokenLambdaVersionzYtWcna24ojfUnqcHZ2IVfLKvf6aG0b3iUSSkZQm4s": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateLinkTokenLambdaFunction"
         },
-        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
+        "CodeSha256": "BohlxtK4ObBRdHaZSwym8Yf77FbipPw5bXIpHbVYVJk="
       }
     },
-    "ExchangePublicTokenLambdaVersionCQ8BfTBzmBhQHljJpHDWgI8m9IC159ZHJoHtXO9wUS0": {
+    "ExchangePublicTokenLambdaVersionzl4Z6ybWdKG5sSmEyq4ELgcQAOiJGjMSxxD9zZIYf0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ExchangePublicTokenLambdaFunction"
         },
-        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
+        "CodeSha256": "BohlxtK4ObBRdHaZSwym8Yf77FbipPw5bXIpHbVYVJk="
       }
     },
-    "AddItemLambdaVersioneNvF17VwAUE9uTbDkhPghH0uBkuXtloQwXSAVNxKI": {
+    "AddItemLambdaVersionYffiiEYVWk7V1kAg4DTllbJb4Z4PeRKp7S4P64auIw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AddItemLambdaFunction"
         },
-        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
+        "CodeSha256": "BohlxtK4ObBRdHaZSwym8Yf77FbipPw5bXIpHbVYVJk="
       }
     },
-    "DeleteItemLambdaVersionqoE0DweltxOH6fggzE7hf3EMsd8NY7cSN4pD0k": {
+    "DeleteItemLambdaVersion96BDanBwsoaPrKzvA0wHCouY9Bis0ULevHHEMEPUgc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteItemLambdaFunction"
         },
-        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
+        "CodeSha256": "BohlxtK4ObBRdHaZSwym8Yf77FbipPw5bXIpHbVYVJk="
       }
     },
-    "GetItemsLambdaVersionB6woknzY7Js7zvweaMnCOiHtf5X0FbcOjoCBqkRYfUU": {
+    "GetItemsLambdaVersionlj9hdUk4TMNQXOg4MIC1jzNudXeI6wNjm3tIS7Q2U4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetItemsLambdaFunction"
         },
-        "CodeSha256": "Lh5hTbinpEiEAd6/dtxJeNHnEidN9B22PGb3qrWrBYA="
+        "CodeSha256": "BohlxtK4ObBRdHaZSwym8Yf77FbipPw5bXIpHbVYVJk="
+      }
+    },
+    "GetBalancesLambdaVersionbBO7emCZUW99soFoBCVwuCYEoLi2CSx8z1egHOjTmHA": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetBalancesLambdaFunction"
+        },
+        "CodeSha256": "BohlxtK4ObBRdHaZSwym8Yf77FbipPw5bXIpHbVYVJk="
       }
     },
     "ApiGatewayRestApi": {
@@ -748,6 +805,30 @@
           ]
         },
         "PathPart": "item",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceItemBalances": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceItem"
+        },
+        "PathPart": "balances",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceItemBalancesGet": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceItemBalances"
+        },
+        "PathPart": "get",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -1032,6 +1113,51 @@
         },
         "ResourceId": {
           "Ref": "ApiGatewayResourceItems"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodItemBalancesGetOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+              },
+              "ResponseTemplates": {
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceItemBalancesGet"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -1360,7 +1486,53 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1621217812029": {
+    "ApiGatewayMethodItemBalancesGetPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceItemBalancesGet"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "COGNITO_USER_POOLS",
+        "AuthorizerId": {
+          "Ref": "userPoolAuthorizer"
+        },
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetBalancesLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayDeployment1621993018267": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1375,13 +1547,15 @@
         "ApiGatewayMethodPlaidItemPublictokenExchangeOptions",
         "ApiGatewayMethodItemOptions",
         "ApiGatewayMethodItemsOptions",
+        "ApiGatewayMethodItemBalancesGetOptions",
         "ApiGatewayMethodUserGet",
         "ApiGatewayMethodOnboardingCompletePost",
         "ApiGatewayMethodPlaidLinkTokenGet",
         "ApiGatewayMethodPlaidItemPublictokenExchangePost",
         "ApiGatewayMethodItemPost",
         "ApiGatewayMethodItemDelete",
-        "ApiGatewayMethodItemsGet"
+        "ApiGatewayMethodItemsGet",
+        "ApiGatewayMethodItemBalancesGetPost"
       ]
     },
     "GetUserLambdaPermissionApiGateway": {
@@ -1612,6 +1786,43 @@
         "FunctionName": {
           "Fn::GetAtt": [
             "GetItemsLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "GetBalancesLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetBalancesLambdaFunction",
             "Arn"
           ]
         },
@@ -2026,7 +2237,7 @@
     "GetUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetUserLambdaVersion89chDzdFnox5iE07i5iZ5k3GwER8603ioC5PbryF5aA"
+        "Ref": "GetUserLambdaVersionyH51yTMCieWaF4LHcGWs44HqB6K56hano1Xcc7cQPA"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-GetUserLambdaFunctionQualifiedArn"
@@ -2035,7 +2246,7 @@
     "CreateUserOnSignUpLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateUserOnSignUpLambdaVersion6NMVTcLqraApjXkNyZ4XpSr3FWVbVhXFTTs1RMsY"
+        "Ref": "CreateUserOnSignUpLambdaVersion5VsqGxpDzJHx4Y6JLF2aylbZaw9uiRPNc7NUXMOGY"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-CreateUserOnSignUpLambdaFunctionQualifiedArn"
@@ -2044,7 +2255,7 @@
     "CompleteOnboardingLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CompleteOnboardingLambdaVersionMKjXjMGiNlxOq311qf1NNtInSbKJUBFSgFu0lvKFk"
+        "Ref": "CompleteOnboardingLambdaVersionSQteZBX3N8CUsWhV3oAJ8rEXQQc8viMzfI14e3kO8Q"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-CompleteOnboardingLambdaFunctionQualifiedArn"
@@ -2053,7 +2264,7 @@
     "CreateLinkTokenLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateLinkTokenLambdaVersion0dLshdjBhxcBDjdVgbI24gMAmPrRnR6wFV8wDmbVIA"
+        "Ref": "CreateLinkTokenLambdaVersionzYtWcna24ojfUnqcHZ2IVfLKvf6aG0b3iUSSkZQm4s"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-CreateLinkTokenLambdaFunctionQualifiedArn"
@@ -2062,7 +2273,7 @@
     "ExchangePublicTokenLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ExchangePublicTokenLambdaVersionCQ8BfTBzmBhQHljJpHDWgI8m9IC159ZHJoHtXO9wUS0"
+        "Ref": "ExchangePublicTokenLambdaVersionzl4Z6ybWdKG5sSmEyq4ELgcQAOiJGjMSxxD9zZIYf0"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-ExchangePublicTokenLambdaFunctionQualifiedArn"
@@ -2071,7 +2282,7 @@
     "AddItemLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AddItemLambdaVersioneNvF17VwAUE9uTbDkhPghH0uBkuXtloQwXSAVNxKI"
+        "Ref": "AddItemLambdaVersionYffiiEYVWk7V1kAg4DTllbJb4Z4PeRKp7S4P64auIw"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-AddItemLambdaFunctionQualifiedArn"
@@ -2080,7 +2291,7 @@
     "DeleteItemLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteItemLambdaVersionqoE0DweltxOH6fggzE7hf3EMsd8NY7cSN4pD0k"
+        "Ref": "DeleteItemLambdaVersion96BDanBwsoaPrKzvA0wHCouY9Bis0ULevHHEMEPUgc"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-DeleteItemLambdaFunctionQualifiedArn"
@@ -2089,10 +2300,19 @@
     "GetItemsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetItemsLambdaVersionB6woknzY7Js7zvweaMnCOiHtf5X0FbcOjoCBqkRYfUU"
+        "Ref": "GetItemsLambdaVersionlj9hdUk4TMNQXOg4MIC1jzNudXeI6wNjm3tIS7Q2U4"
       },
       "Export": {
         "Name": "sls-wealthtracker-dev-GetItemsLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetBalancesLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetBalancesLambdaVersionbBO7emCZUW99soFoBCVwuCYEoLi2CSx8z1egHOjTmHA"
+      },
+      "Export": {
+        "Name": "sls-wealthtracker-dev-GetBalancesLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {

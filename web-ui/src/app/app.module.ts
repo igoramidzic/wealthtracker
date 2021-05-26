@@ -12,6 +12,7 @@ import awsconfig from "../aws-exports";
 import { WealthTrackerApiHttpInterceptor } from './core/interceptors/wealthtracker_api.interceptor';
 import { NgxPlaidLinkModule } from 'ngx-plaid-link';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
 
 Amplify.configure(awsconfig);
 
@@ -28,7 +29,8 @@ Amplify.configure(awsconfig);
     ReactiveFormsModule,
     HttpClientModule,
     NgxPlaidLinkModule,
-    NgbModule
+    NgbModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {

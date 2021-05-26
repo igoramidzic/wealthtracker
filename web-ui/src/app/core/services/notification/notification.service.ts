@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../environments/environment';
+import { EPlaidEnvironment } from '../../models/plaid';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +11,13 @@ export class NotificationService {
 
   constructor() {
     this.notifications = [];
-    this.addNotification({
-      type: ENotificationType.INFO,
-      subject: 'Sandbox mode:',
-      message: 'user_good pass_good'
-    })
+    if (environment.plaid.environment == EPlaidEnvironment.SANDBOX) {
+      this.addNotification({
+        type: ENotificationType.INFO,
+        subject: 'Sandbox mode:',
+        message: 'user_good pass_good'
+      })
+    }
   }
 
   addNotification(notification: INotification): void {

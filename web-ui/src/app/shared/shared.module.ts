@@ -11,6 +11,7 @@ import { NotificationBarComponent } from './components/notifications/notificatio
 import { NgbAccordionModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { SideNavbarComponent } from './components/navbar/side-navbar/side-navbar.component';
 import { ContentLayoutComponent } from './layouts/content-layout/content-layout.component';
+import { RefreshAccountsButtonComponent } from './components/accounts/refresh-accounts-button/refresh-accounts-button.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ContentLayoutComponent } from './layouts/content-layout/content-layout.
     AddAccountButtonComponent,
     NotificationBarComponent,
     SideNavbarComponent,
-    ContentLayoutComponent
+    ContentLayoutComponent,
+    RefreshAccountsButtonComponent
   ],
   exports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { ContentLayoutComponent } from './layouts/content-layout/content-layout.
     NotificationBarComponent,
     NgbAccordionModule,
     NgbCollapseModule,
-    SideNavbarComponent
+    SideNavbarComponent,
+    RefreshAccountsButtonComponent
   ],
 })
 export class SharedModule { }

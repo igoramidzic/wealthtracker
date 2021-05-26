@@ -1,0 +1,11 @@
+<button class="btn btn-sm" type="button" (click)="refreshAccounts()" [disabled]="!accountsService.allowRefresh">
+    <ng-container *ngIf="accountsService.refreshingAccounts; else notRefreshingAccounts">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span class="sr-only">Loading...</span>
+    </ng-container>
+    <ng-template #notRefreshingAccounts>
+        <span>
+            <i class="fas fa-sync-alt"></i>
+        </span>
+    </ng-template>
+</button>

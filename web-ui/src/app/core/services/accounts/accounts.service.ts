@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { IItem } from '../../models/item';
 import { Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,25 @@ export class AccountsService {
 
   items: IItem[];
   items$: Subject<IItem[]>;
+  refreshingAccounts: boolean;
+  refreshingAccounts$: Subject<boolean>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private toastr: ToastrService) {
     this.items$ = new Subject();
+    this.refreshingAccounts$ = new Subject();
+  }
+
+  async refreshAccounts(): Promise<void> {
+    this.refreshingAccounts = true;
+    this.refreshingAccounts$.next(true);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.toastr.info("Development in progress", "Account Refresh");
+        this.refreshingAccounts = false;
+        this.refreshingAccounts$.next(false);
+        resolve();
+      }, 1000);
+    })
   }
 
   async addItem(public_token: string): Promise<IItem> {
@@ -45,5 +62,9 @@ export class AccountsService {
           this.items$.next(this.items);
         })
       ).toPromise();
+  }
+
+  get allowRefresh(): boolean {
+    return !this.refreshingAccounts && !!this.items;
   }
 }

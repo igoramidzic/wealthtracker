@@ -1,6 +1,9 @@
 <div class="pb-4 d-flex align-items-center justify-content-between">
     <h3 class="mb-0">Accounts</h3>
-    <app-add-account-button></app-add-account-button>
+    <div class="d-flex align-items-center">
+        <app-refresh-accounts-button class="mr-2"></app-refresh-accounts-button>
+        <app-add-account-button></app-add-account-button>
+    </div>
 </div>
 
 <div *ngIf="!!accountsHolder">
@@ -10,11 +13,11 @@
     </div>
 
     <div *ngFor="let accountType of accountsHolder.accountTypes">
-        <div class="mx-n3 px-3 py-2 d-flex align-items-center justify-content-between bg-light">
-            <h5 class="mb-0">{{ accountType.title }}</h5>
-            <strong>{{ accountType.balance | currency }}</strong>
-        </div>
-        <div>
+        <div *ngIf="accountType.accounts.length > 0">
+            <div class="mx-n3 px-3 py-2 d-flex align-items-center justify-content-between bg-light">
+                <h5 class="mb-0">{{ accountType.title }}</h5>
+                <strong>{{ accountType.balance | currency }}</strong>
+            </div>
             <div class="pb-2">
                 <ul class="list-group list-group-flush pt-2">
                     <li class="px-2 py-1 list-group-item border-0" *ngFor="let account of accountType.accounts">

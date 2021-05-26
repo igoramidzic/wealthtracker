@@ -13,7 +13,7 @@ export const environment: IEnvironment = {
     apiVersion: "v2",
     clientName: "",
     countryCodes: ["US"],
-    products: ['auth', 'transactions']
+    products: ['auth', 'transactions', 'investments']
   }
 };
 
