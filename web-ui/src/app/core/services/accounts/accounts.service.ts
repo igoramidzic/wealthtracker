@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { EItemStatus, IItem } from '../../models/item';
 import { Subject } from 'rxjs';
 
@@ -18,6 +18,9 @@ export class AccountsService {
   constructor(private http: HttpClient) {
     this.items$ = new Subject();
     this.refreshingAccounts$ = new Subject();
+    this.items$.pipe(take(1)).subscribe(() => {
+      this.refreshAccounts();
+    })
   }
 
   refreshAccounts(): void {

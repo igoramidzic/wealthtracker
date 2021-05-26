@@ -99,7 +99,6 @@ export class AuthService {
 
     try {
       let signInResult = await Auth.signIn(email, password);
-      console.log(signInResult.signInUserSession.idToken.jwtToken);
       this.setNextStep(AuthNextStep.None);
 
       return signInResult;
@@ -176,7 +175,10 @@ export class AuthService {
 
   async signOut(): Promise<void> {
     await Auth.signOut();
-    this.router.navigate(['/auth/successful-signout']);
+    this.router.navigate(['/auth/successful-signout'])
+      .then(() => {
+        window.location.reload();
+      })
   }
 }
 
