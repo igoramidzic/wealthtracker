@@ -48,6 +48,14 @@ const routes: Routes = [
                 loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
               },
               {
+                path: PAGE_ROUTES_CONSTANTS.INVESTMENTS,
+                loadChildren: () => import('./features/investments/investments.module').then(m => m.InvestmentsModule)
+              },
+              {
+                path: PAGE_ROUTES_CONSTANTS.RETIREMENT,
+                loadChildren: () => import('./features/retirement/retirement.module').then(m => m.RetirementModule)
+              },
+              {
                 path: PAGE_ROUTES_CONSTANTS.SETTINGS,
                 loadChildren: () => import('./features/settings/settings.module').then(m => m.SettingsModule)
               }

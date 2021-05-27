@@ -1,10 +1,10 @@
-<div class="d-flex flex-column justify-content-between h-100 shadow bg-white" style="width: 3.5rem;">
-    <div class="list-group list-group-flush border-bottom scrollarea">
-        <a [routerLink]="['/']" class="list-group-item list-group-item-action px-1 py-3 lh-tight nav-item" aria-current="true">
+<div class="d-flex flex-column justify-content-between h-100 shadow-sm bg-white" style="width: 3.5rem;">
+    <div class="list-group list-group-flush scrollarea">
+        <a [routerLink]="['/']" class="list-group-item list-group-item-action px-1 py-3 lh-tight nav-item border-bottom-0" aria-current="true">
             WT
         </a>
-        <a [routerLink]="['/dashboard']" [routerLinkActive]="['active']" class="nav-item list-group-item list-group-item-action px-1 py-2 lh-tight" aria-current="true">
-            <i class="fas fa-chart-bar"></i>
+        <a *ngFor="let sidebarLink of sidebarLinks" [routerLink]="[sidebarLink.route]" [routerLinkActive]="['active']" class="nav-item list-group-item list-group-item-action px-1 py-2 lh-tight border-bottom-0" aria-current="true">
+            <i [class]="sidebarLink.iconClass"></i>
         </a>
     </div>
     <div class="list-group list-group-flush scrollarea py-3">
@@ -12,17 +12,21 @@
             <i class="fas fa-cog"></i>
         </a>
 
-        <div class="btn-group dropup">
+        <button class="nav-item list-group-item list-group-item-action px-1 py-2 lh-tight border-bottom-0" (click)="auth.signOut()">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+
+        <!-- <div class="btn-group dropup">
             <button type="button" class="nav-item list-group-item list-group-item-action px-1 py-2 lh-tight border-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user-circle"></i>
             </button>
             <div class="dropdown-menu">
                 <div class="list-group list-group-flush">
                     <button class="list-group-item list-group-item-action" (click)="auth.signOut()">
-                        Logout
+                        <i class="fas fa-sign-out-alt"></i>
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>

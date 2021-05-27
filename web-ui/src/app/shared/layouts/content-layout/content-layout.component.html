@@ -1,7 +1,9 @@
 <div class="d-flex h-100">
-    <app-side-navbar></app-side-navbar>
-    <div class="flex-fill mh-100" style="overflow-y: auto;">
+    <app-side-navbar style="z-index: 2;"></app-side-navbar>
+    <div class="d-flex flex-column flex-fill mh-100" style="overflow-y: auto;">
         <app-notification-bar></app-notification-bar>
-        <router-outlet></router-outlet>
+        <div class="flex-fill">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>

@@ -8,9 +8,30 @@ import { AuthService } from '../../../../core/services/auth/auth.service';
 })
 export class SideNavbarComponent implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  sidebarLinks: ISidebarLink[];
+
+  constructor(public auth: AuthService) {
+    this.sidebarLinks = [
+      {
+        route: '/dashboard',
+        iconClass: 'fas fa-border-all'
+      },
+      {
+        route: '/retirement',
+        iconClass: 'fas fa-umbrella-beach'
+      },
+      {
+        route: '/investments',
+        iconClass: 'fas fa-chart-bar'
+      }
+    ];
+  }
 
   ngOnInit(): void {
   }
 
+}
+interface ISidebarLink {
+  iconClass: string;
+  route: string;
 }
