@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ERetirementPlannerPlanStatus, RetirementPlannerService } from '../../../../core/services/retirement-planner/retirement-planner.service';
+import { ERetirementPlannerPlanStatus } from 'src/app/core/models/retirement-planner';
+import { RetirementPlannerService } from '../../../../core/services/retirement-planner/retirement-planner.service';
 
 @Component({
   selector: 'app-retirement-planner-page',
@@ -13,16 +14,4 @@ export class RetirementPlannerPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get classForStatus(): string {
-    switch (this.RPS.planStatus) {
-      case ERetirementPlannerPlanStatus.ON_TRACK:
-        return 'text-success';
-      case ERetirementPlannerPlanStatus.MANAGEABLE:
-        return 'text-info';
-      case ERetirementPlannerPlanStatus.STRETCH:
-        return 'text-warning';
-      case ERetirementPlannerPlanStatus.NOT_AFFORDABLE:
-        return 'text-danger';
-    }
-  }
 }

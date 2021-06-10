@@ -1,0 +1,22 @@
+<div class="d-flex flex-column">
+    <div class="card shadow-none bg-light">
+        <div class="card-body">
+            <h6 class="text-muted mb-0">Assumptions</h6>
+            <div class="pt-3 px-3">
+                <div class="d-flex align-items-center justify-content-between pb-2">
+                    <small>Expected Tax Rate</small>
+                    <span>{{ RPS.plan.assumptions.effectiveTaxRate * 100 | number : '1.1-2' }}%</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between pb-2">
+                    <small>Inflation</small>
+                    <span>{{ RPS.plan.assumptions.inflation * 100 | number : '1.1-2' }}%</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <small>Life Expectancy</small>
+                    <span>{{ RPS.plan.assumptions.lifeExpectancy }} years</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="mt-3 btn btn-sm btn-link align-self-center" (click)="onEditAssumptions()">Edit Assumptions</button>
+</div>

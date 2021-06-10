@@ -97,4 +97,8 @@ export class AccountsService {
   get allowRefresh(): boolean {
     return !this.refreshingAccounts && !!this.items && this.items.length > 0;
   }
+
+  getInvestmentBalance(): number {
+    return 0;
+  }
 }

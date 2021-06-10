@@ -1,0 +1,21 @@
+<form class="d-flex flex-column" (ngSubmit)="onSave()">
+    <div class="card shadow-none bg-light">
+        <div class="card-body">
+            <h6 class="text-muted mb-0">Goal</h6>
+            <div class="pt-3 px-3">
+                <div class="d-flex align-items-center justify-content-between pb-2">
+                    <small>Retirement Age</small>
+                    <input type="text" class="form-control form-control-sm" type="number" name="retirementAge" style="width: 76px;" [(ngModel)]="goal.retirementAge">
+                </div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <small>Annual Spending</small>
+                    <input type="text" class="form-control form-control-sm" type="number" name="annualSpending" style="width: 100px;" [(ngModel)]="goal.desiredRetirementAnnualIncome">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center mt-3">
+        <button class="btn btn-sm btn-link align-self-center mr-2" (click)="onCancel()" type="button">Cancel</button>
+        <button class="btn btn-sm btn-link align-self-center ml-2" type="submit">Save</button>
+    </div>
+</form>

@@ -1,0 +1,6 @@
+<ng-container *ngIf="showEditAssumptionsForm; else elseTemplate">
+    <app-assumption-edit-form (updated)="onUpdated()" (canceled)="onCanceled()"></app-assumption-edit-form>
+</ng-container>
+<ng-template #elseTemplate>
+    <app-assumption-displayer (edit)="onEdit()"></app-assumption-displayer>
+</ng-template>

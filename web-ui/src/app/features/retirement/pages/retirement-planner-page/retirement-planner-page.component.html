@@ -1,64 +1,21 @@
 <div class="py-3 py-md-5 bg-white h-100">
-    <div class="d-flex align-items-start container px-3 px-md-4">
-        <div class="card shadow-none bg-light d-none d-lg-block mr-md-3" style="min-width: 200px">
-            <div class="card-body">
-                Left
-            </div>
-        </div>
-
+    <div class="d-flex align-items-start container-sm px-3 px-md-4">
         <div class="flex-fill">
-            <small class="d-block mb-3 text-muted">Retirement Planner</small>
+            <small class="d-block mb-3 text-primary">Retirement Planner</small>
 
-            <div>
-                <span class="h4 font-weight-bold" [class]="classForStatus">{{ RPS.planStatus }}</span>
-                <span class="px-2 text-muted">to retired at</span>
-                <span class="h5 font-weight-bold">{{ RPS.plan.retirementAge }}</span>
-            </div>
+            <app-retirement-status-displayer></app-retirement-status-displayer>
 
-            <div class="row pt-4 mb-5">
+            <app-retirement-stats-displayer class="d-block pt-4 mb-5"></app-retirement-stats-displayer>
 
-                <div class="col-4">
-                    <h5 class="mb-1 font-weight-bold">{{ RPS.balanceGoal | currency : 'USD' : 'symbol' : '1.0-0'  }}</h5>
-                    <small class="text-muted">My Goal</small>
-                    <hr class="my-0 mt-1">
-                </div>
+            <app-contribution-totals class="d-block mb-2"></app-contribution-totals>
 
-                <div class="col-4">
-                    <h5 class="mb-1 font-weight-bold">{{ RPS.plan.currentInvestmentsBalance | currency : 'USD' : 'symbol' : '1.0-0' }}</h5>
-                    <small class="text-muted">Current Balance</small>
-                    <hr class="my-0 mt-1">
-                </div>
-
-                <div class="col-4">
-                    <h5 class="mb-1 font-weight-bold">{{ RPS.progressToGoal }}%</h5>
-                    <small class="text-muted">Goal Progress</small>
-                    <hr class="my-0 mt-1">
-                </div>
-            </div>
-
-
-            <p><small>Inflation:</small> {{ RPS.plan.inflation * 100 }}%</p>
-            <p><small>Current Age:</small> {{ RPS.plan.currentAge }}</p>
-            <p><small>Retirement Age:</small> {{ RPS.plan.retirementAge }}</p>
-            <p><small>Annual Income:</small> {{ RPS.plan.currentAnnualIncome | currency }}</p>
-            <p><small>Desired Retirement Annual Income:</small> {{ RPS.plan.desiredRetirementAnnualIncome | currency }}</p>
-            <p><small>Current Personal Contributions:</small> {{ RPS.plan.currentPersonalAnnualContributions | currency }}/yr</p>
-            <p><small>Current Employer Contributions:</small> {{ RPS.plan.currentEmployerAnnualContributions | currency }}/yr</p>
-            <p><small>Expected Returns:</small> {{ RPS.plan.expectedReturns }}%</p>
-            <p><small>Current Investments Balance:</small> {{ RPS.plan.currentInvestmentsBalance | currency }}</p>
-            <p><small>Compound Frequency:</small> {{ RPS.plan.compoundFrequency }}</p>
-            <hr>
-            <p><small>Balance Goal:</small> {{ RPS.balanceGoal | currency }}</p>
-            <p><small>Current Balance:</small> {{ RPS.plan.currentInvestmentsBalance | currency }}</p>
-            <p><small>Progress to Goal:</small> {{ RPS.progressToGoal }}%</p>
-            <p><small>Balance at Retirement:</small> {{ RPS.balanceAtRetirement | currency }}</p>
-            <p><small>Plan Status:</small> {{ RPS.planStatus }}</p>
+            <app-contributions-chart></app-contributions-chart>
         </div>
 
-        <div class="card shadow-none bg-light ml-sm-3 d-none d-md-block" style="min-width: 200px">
-            <div class="card-body">
-                Right
-            </div>
+        <div class="ml-sm-3 d-flex flex-column" style="min-width: 300px">
+            <app-goal-section class="mb-3"></app-goal-section>
+            <app-assumptions-section></app-assumptions-section>
         </div>
+
     </div>
 </div>

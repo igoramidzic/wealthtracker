@@ -1,0 +1,6 @@
+<ng-container *ngIf="showEditForm; else elseTemplate">
+    <app-goal-edit-form (updated)="onUpdated()" (canceled)="onCanceled()"></app-goal-edit-form>
+</ng-container>
+<ng-template #elseTemplate>
+    <app-goal-displayer (edit)="onEdit()"></app-goal-displayer>
+</ng-template>

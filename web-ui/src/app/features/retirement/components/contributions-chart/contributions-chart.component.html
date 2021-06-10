@@ -1,0 +1,19 @@
+<div #containerRef>
+  <ngx-charts-area-chart-stacked 
+    [view]="[containerRef.offsetWidth, 250]"
+    [scheme]="colorScheme"
+    [results]="multi"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="legend"
+    [xAxisTicks]="xAxisTicks"
+    [yAxisTickFormatting]="yAxisTickFormatting"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [showGridLines]="showGridLines"
+    (activate)="onActivate($event)"
+    (select)="onSelect($event)">
+  </ngx-charts-area-chart-stacked>
+</div>

@@ -12,6 +12,8 @@ import { NgbAccordionModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstra
 import { SideNavbarComponent } from './components/navbar/side-navbar/side-navbar.component';
 import { ContentLayoutComponent } from './layouts/content-layout/content-layout.component';
 import { RefreshAccountsButtonComponent } from './components/accounts/refresh-accounts-button/refresh-accounts-button.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ThousandSuffixesPipe } from '../core/pipes/currencySuffix.pipe';
 
 @NgModule({
   imports: [
@@ -22,7 +24,8 @@ import { RefreshAccountsButtonComponent } from './components/accounts/refresh-ac
     NgxSliderModule,
     AmplifyUIAngularModule,
     NgbAccordionModule,
-    NgbCollapseModule
+    NgbCollapseModule,
+    NgxChartsModule
   ],
   declarations: [
     MainNavbarComponent,
@@ -31,7 +34,8 @@ import { RefreshAccountsButtonComponent } from './components/accounts/refresh-ac
     NotificationBarComponent,
     SideNavbarComponent,
     ContentLayoutComponent,
-    RefreshAccountsButtonComponent
+    RefreshAccountsButtonComponent,
+    ThousandSuffixesPipe
   ],
   exports: [
     CommonModule,
@@ -46,7 +50,9 @@ import { RefreshAccountsButtonComponent } from './components/accounts/refresh-ac
     NgbAccordionModule,
     NgbCollapseModule,
     SideNavbarComponent,
-    RefreshAccountsButtonComponent
+    RefreshAccountsButtonComponent,
+    NgxChartsModule,
+    ThousandSuffixesPipe
   ],
 })
 export class SharedModule { }
