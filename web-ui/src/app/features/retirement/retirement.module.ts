@@ -15,6 +15,8 @@ import { AssumptionsSectionComponent } from './components/assumptions-section/as
 import { GoalSectionComponent } from './components/goal-section/goal-section.component';
 import { GoalEditFormComponent } from './components/goal-edit-form/goal-edit-form.component';
 import { GoalDisplayerComponent } from './components/goal-displayer/goal-displayer.component';
+import { ReturnsDisclaimerComponent } from './components/returns-disclaimer/returns-disclaimer.component';
+import { InvestmentPerformanceDisplayerComponent } from './components/investment-performance-displayer/investment-performance-displayer.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { GoalDisplayerComponent } from './components/goal-displayer/goal-display
     GoalSectionComponent,
     GoalEditFormComponent,
     GoalDisplayerComponent,
+    ReturnsDisclaimerComponent,
+    InvestmentPerformanceDisplayerComponent,
   ],
   imports: [
     CommonModule,

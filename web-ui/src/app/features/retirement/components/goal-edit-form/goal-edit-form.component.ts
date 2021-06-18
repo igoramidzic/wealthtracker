@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { IRetirementGoal, IRetirementPlanAssumptions } from 'src/app/core/models/retirement-planner';
+import { IRetirementGoal } from 'src/app/core/models/retirement-planner';
 import { RetirementPlannerService } from 'src/app/core/services/retirement-planner/retirement-planner.service';
 
 @Component({

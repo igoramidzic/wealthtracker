@@ -100,19 +100,19 @@ export class ContributionsChartComponent implements OnInit {
       // });
     }
 
-    let currentBalance = contributions[contributions.length - 1].total;
-    let age = contributions[contributions.length - 1].age + 1;
+    // let currentBalance = contributions[contributions.length - 1].total;
+    // let age = contributions[contributions.length - 1].age + 1;
 
-    while (age <= this.plan.assumptions.lifeExpectancy) {
-      let newBalance = currentBalance - this.plan.goal.desiredRetirementAnnualIncome
-      this.multi[0].series.push({
-        name: age,
-        value: newBalance < 0 ? 0 : newBalance
-      });
+    // while (age <= this.plan.assumptions.lifeExpectancy) {
+    //   let newBalance = currentBalance - this.plan.goal.desiredRetirementAnnualIncome
+    //   this.multi[0].series.push({
+    //     name: age,
+    //     value: newBalance < 0 ? 0 : newBalance
+    //   });
 
-      age++;
-      currentBalance -= this.plan.goal.desiredRetirementAnnualIncome;
-    }
+    //   age++;
+    //   currentBalance -= this.plan.goal.desiredRetirementAnnualIncome;
+    // }
   }
 
   generateXAxisTicks(plan: IRetirementPlannerPlan): void {

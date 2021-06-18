@@ -13,7 +13,7 @@ export interface IRetirementPlannerPlan {
 
 export interface IRetirementGoal {
   retirementAge: number;
-  desiredRetirementAnnualIncome: number;
+  desiredMonthlySpending: number;
 }
 
 export interface IRetirementPlanAssumptions {

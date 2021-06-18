@@ -22,7 +22,7 @@ export class RetirementPlannerService {
     this.plan = {
       goal: {
         retirementAge: faker.datatype.number({ min: 51, max: 85 }),
-        desiredRetirementAnnualIncome: faker.datatype.number({ min: 20, max: 100 }) * 1000,
+        desiredMonthlySpending: faker.datatype.number({ min: 20, max: 100 }) * 1000 / 12,
       },
       assumptions: {
         inflation: 0.02,
@@ -41,7 +41,7 @@ export class RetirementPlannerService {
     this.plan = {
       goal: {
         retirementAge: 65,
-        desiredRetirementAnnualIncome: 50000,
+        desiredMonthlySpending: 50000 / 12,
       },
       assumptions: {
         inflation: 0.02,
@@ -96,7 +96,7 @@ export class RetirementPlannerService {
   }
 
   private calculateBalanceGoal(plan: IRetirementPlannerPlan): number {
-    return plan.goal.desiredRetirementAnnualIncome / 0.04;
+    return plan.goal.desiredMonthlySpending * 12 / 0.04;
   }
 
   private calculateProgressToGoal(plan: IRetirementPlannerPlan, balanceGoal: number): number {
@@ -123,7 +123,7 @@ export class RetirementPlannerService {
       employer: 0,
       personal: plan.currentInvestmentsBalance,
       interest: 0,
-      total: 0
+      total: plan.currentInvestmentsBalance
     })
 
     let yearsLeftBeforeRetirement = plan.goal.retirementAge - plan.currentAge;
@@ -149,6 +149,29 @@ export class RetirementPlannerService {
         age: age,
         employer: Math.round(accumulatedEmployerContribution * 100) / 100,
         personal: Math.round(accumulatedPersonalContribution * 100) / 100,
+        interest: Math.round(accumulatedInterest * 100) / 100,
+        total: Math.round(accumulatedTotal * 100) / 100
+      })
+    }
+
+    for (let i = plan.goal.retirementAge - plan.currentAge + 1; i <= yearsLeftBeforeRetirement + (plan.assumptions.lifeExpectancy - plan.goal.retirementAge); i++) {
+      let age = plan.currentAge + i;
+
+      let previousAccumulatedEmployerContribution = contributions[i - 1].employer;
+      let previousAccumulatedPersonalContribution = contributions[i - 1].personal;
+      let previousAccumulatedInterest = contributions[i - 1].interest;
+      let previousAccumulatedTotal = contributions[i - 1].total - (plan.goal.desiredMonthlySpending * 12 * 1.20);
+
+      let currentInterest = (previousAccumulatedTotal) * (plan.annualReturns - plan.assumptions.inflation);
+      let accumulatedInterest = previousAccumulatedInterest + currentInterest;
+
+      let accumulatedTotal = previousAccumulatedTotal + currentInterest;
+
+
+      contributions.push({
+        age: age,
+        employer: Math.round(previousAccumulatedEmployerContribution * 100) / 100,
+        personal: Math.round(previousAccumulatedPersonalContribution * 100) / 100,
         interest: Math.round(accumulatedInterest * 100) / 100,
         total: Math.round(accumulatedTotal * 100) / 100
       })
