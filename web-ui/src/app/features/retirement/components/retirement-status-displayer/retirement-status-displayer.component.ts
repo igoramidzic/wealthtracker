@@ -14,6 +14,17 @@ export class RetirementStatusDisplayerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get retirementAge(): number | string {
+    if (this.RPS.plan)
+      return this.RPS.plan.goal.retirementAge;
+    return 'XX';
+  }
+
+  get planStatus(): ERetirementPlannerPlanStatus | string {
+    if (this.RPS.plan)
+      return this.RPS.planStatus;
+    return "Loading";
+  }
   get classForStatus(): string {
     switch (this.RPS.planStatus) {
       case ERetirementPlannerPlanStatus.ON_TRACK:
@@ -24,6 +35,8 @@ export class RetirementStatusDisplayerComponent implements OnInit {
         return 'text-warning';
       case ERetirementPlannerPlanStatus.NOT_AFFORDABLE:
         return 'text-danger';
+      default:
+        return ''
     }
   }
 }

@@ -3,6 +3,7 @@ import * as faker from 'faker';
 import { Subject } from 'rxjs/internal/Subject';
 import { EInvestmentCompoundFrequency, ERetirementPlannerPlanStatus, IRetirementPlannerPlan, IRetirementContribution, IRetirementPlanAssumptions, IRetirementGoal } from '../../models/retirement-planner';
 import { AccountsService } from '../accounts/accounts.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -19,43 +20,9 @@ export class RetirementPlannerService {
 
   constructor(private accountsService: AccountsService) {
     this.plan$ = new Subject();
-    this.plan = {
-      goal: {
-        retirementAge: faker.datatype.number({ min: 51, max: 85 }),
-        desiredMonthlySpending: faker.datatype.number({ min: 20, max: 100 }) * 1000 / 12,
-      },
-      assumptions: {
-        inflation: 0.02,
-        lifeExpectancy: faker.datatype.number({ min: 80, max: 110 }),
-      },
-      currentAge: faker.datatype.number({ min: 18, max: 50 }),
-      currentInvestmentsBalance: faker.datatype.number({ min: 1000, max: 200000 }),
-      currentPersonalAnnualContributions: faker.datatype.number({ min: 2000, max: 20000 }),
-      currentEmployerAnnualContributions: faker.datatype.number({ min: 100, max: 5000 }),
-      currentAnnualIncome: faker.datatype.number({ min: 20000, max: 200000 }),
-      compoundFrequency: EInvestmentCompoundFrequency.MONTHLY,
-      annualReturns: faker.datatype.float({ min: 2, max: 10 }) / 100,
-    }
-
-    this.plan = {
-      goal: {
-        retirementAge: 65,
-        desiredMonthlySpending: 50000 / 12,
-      },
-      assumptions: {
-        inflation: 0.02,
-        lifeExpectancy: 90,
-      },
-      currentAge: 23,
-      currentInvestmentsBalance: 50000,
-      currentPersonalAnnualContributions: 11250,
-      currentEmployerAnnualContributions: 4000,
-      currentAnnualIncome: 100000,
-      compoundFrequency: EInvestmentCompoundFrequency.ANNUALLY,
-      annualReturns: 0.08,
-    }
 
     this.plan$.subscribe(plan => {
+      this.plan = plan;
       this.balanceAtRetirement = this.calculateInvestmentAmountAtRetirement(plan);
       this.balanceGoal = this.calculateBalanceGoal(plan);
       this.progressToGoal = this.calculateProgressToGoal(plan, this.balanceGoal);
@@ -63,7 +30,48 @@ export class RetirementPlannerService {
       this.contributions = this.calculateContributionsOverTime(plan)
     })
 
-    this.plan$.next(this.plan);
+    this.fetchRetirementPlan();
+  }
+
+  private fetchRetirementPlan(): void {
+    setTimeout(() => {
+      // let plan = {
+      //   goal: {
+      //     retirementAge: faker.datatype.number({ min: 51, max: 85 }),
+      //     desiredMonthlySpending: faker.datatype.number({ min: 20, max: 100 }) * 1000 / 12,
+      //   },
+      //   assumptions: {
+      //     inflation: 0.02,
+      //     lifeExpectancy: faker.datatype.number({ min: 80, max: 110 }),
+      //   },
+      //   currentAge: faker.datatype.number({ min: 18, max: 50 }),
+      //   currentInvestmentsBalance: faker.datatype.number({ min: 1000, max: 200000 }),
+      //   currentPersonalAnnualContributions: faker.datatype.number({ min: 2000, max: 20000 }),
+      //   currentEmployerAnnualContributions: faker.datatype.number({ min: 100, max: 5000 }),
+      //   currentAnnualIncome: faker.datatype.number({ min: 20000, max: 200000 }),
+      //   compoundFrequency: EInvestmentCompoundFrequency.MONTHLY,
+      //   annualReturns: faker.datatype.float({ min: 2, max: 10 }) / 100,
+      // }
+      let plan = {
+        goal: {
+          retirementAge: 65,
+          desiredMonthlySpending: 50000 / 12,
+        },
+        assumptions: {
+          inflation: 0.02,
+          lifeExpectancy: 90,
+        },
+        currentAge: 23,
+        currentInvestmentsBalance: 50000,
+        currentPersonalAnnualContributions: 11250,
+        currentEmployerAnnualContributions: 4000,
+        currentAnnualIncome: 100000,
+        compoundFrequency: EInvestmentCompoundFrequency.ANNUALLY,
+        annualReturns: 0.08,
+      }
+
+      this.plan$.next(plan);
+    }, 2000);
   }
 
   editAssumptions(assumptions: IRetirementPlanAssumptions): void {

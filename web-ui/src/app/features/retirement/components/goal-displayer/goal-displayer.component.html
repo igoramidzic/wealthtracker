@@ -8,11 +8,11 @@
             <div class="pt-3 px-3">
                 <div class="d-flex align-items-center justify-content-between pb-2">
                     <small>Retirement Age</small>
-                    <span>{{ RPS.plan.goal.retirementAge }}</span>
+                    <span>{{ RPS.plan?.goal.retirementAge }}</span>
                 </div>
                 <div class="d-flex align-items-center justify-content-between">
                     <small>Monthly Spending</small>
-                    <span>${{ RPS.plan.goal.desiredMonthlySpending | thousandSuff }}</span>
+                    <span>${{ RPS.plan?.goal.desiredMonthlySpending | thousandSuff }}</span>
                 </div>
             </div>
         </div>

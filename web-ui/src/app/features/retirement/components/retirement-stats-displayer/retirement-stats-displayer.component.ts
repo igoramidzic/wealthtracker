@@ -13,4 +13,24 @@ export class RetirementStatsDisplayerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get balanceGoal(): number {
+    if (this.RPS.balanceGoal)
+      return this.RPS.balanceGoal;
+
+    return 0;
+  }
+
+  get currentInvestmentsBalance(): number {
+    if (this.RPS.plan)
+      return this.RPS.plan.currentInvestmentsBalance;
+
+    return 0;
+  }
+
+  get progressToGoal(): number {
+    if (this.RPS.plan)
+      return this.RPS.progressToGoal;
+
+    return 0;
+  }
 }

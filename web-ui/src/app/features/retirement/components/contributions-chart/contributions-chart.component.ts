@@ -47,8 +47,9 @@ export class ContributionsChartComponent implements OnInit {
       this.performSetupOnNewPlan(plan);
     });
 
-    this.plan = this.RPS.plan;
-    this.performSetupOnNewPlan(this.RPS.plan);
+    if (this.RPS.plan) {
+      this.performSetupOnNewPlan(this.RPS.plan);
+    }
   }
 
   ngOnInit(): void {
