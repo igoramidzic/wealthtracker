@@ -1,0 +1,35 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-wealthtracker-dev-225436-authRole",
+      "UnauthRoleArn": "arn:aws:iam::733106168558:role/amplify-wealthtracker-dev-225436-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::733106168558:role/amplify-wealthtracker-dev-225436-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-wealthtracker-dev-225436-deployment",
+      "UnauthRoleName": "amplify-wealthtracker-dev-225436-unauthRole",
+      "StackName": "amplify-wealthtracker-dev-225436",
+      "StackId": "arn:aws:cloudformation:us-east-2:733106168558:stack/amplify-wealthtracker-dev-225436/64c9d200-b2cd-11eb-bd82-0265b0cf9604",
+      "AmplifyAppId": "dfb6np3jfclx4"
+    }
+  },
+  "auth": {
+    "wealthtracker2132454c": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "output": {
+        "UserPoolId": "us-east-2_sZLn1s3W1",
+        "UserPoolName": "wealthtracker-user-pool--dev",
+        "AppClientID": "6cq1ta1qc4hl8507ibttdqrrbp",
+        "AppClientSecret": "le2051032e8364rflgvs7jgisf1rlr02atlevv64polh51d3lk1",
+        "AppClientIDWeb": "3152ri0tvodvmg2lp94oo4sph6",
+        "IdentityPoolId": "us-east-2:df8a01b0-7391-4b63-acf5-35b49587debe",
+        "IdentityPoolName": "wealthtracker_identity_pool__dev",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\",\"implicit\"],\"AllowedOAuthScopes\":[\"aws.cognito.signin.user.admin\",\"email\",\"openid\",\"phone\",\"profile\"],\"CallbackURLs\":[\"https://example.com/callback\"],\"LogoutURLs\":[\"https://example.com/signout\"]}"
+      },
+      "lastPushTimeStamp": "2021-05-12T03:00:42.865Z"
+    }
+  }
+}

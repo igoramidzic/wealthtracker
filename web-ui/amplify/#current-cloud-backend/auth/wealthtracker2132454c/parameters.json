@@ -1,0 +1,6 @@
+{
+  "authSelections": "identityPoolAndUserPool",
+  "resourceName": "wealthtracker2132454c",
+  "serviceType": "imported",
+  "region": "us-east-2"
+}

@@ -17,7 +17,6 @@ export interface IRetirementGoal {
 }
 
 export interface IRetirementPlanAssumptions {
-  effectiveTaxRate: number;
   lifeExpectancy: number;
   inflation: number;
 }

@@ -17,7 +17,6 @@ export class AssumptionEditFormComponent implements OnInit {
     this.updated = new EventEmitter();
     this.canceled = new EventEmitter();
     this.assumptions = this.getCopyOfAssumptions(RPS.plan.assumptions);
-    this.assumptions.effectiveTaxRate *= 100;
     this.assumptions.inflation *= 100;
   }
 
@@ -29,7 +28,6 @@ export class AssumptionEditFormComponent implements OnInit {
   }
 
   onSave(): void {
-    this.assumptions.effectiveTaxRate /= 100;
     this.assumptions.inflation /= 100;
     this.RPS.editAssumptions(this.assumptions)
     this.updated.emit();

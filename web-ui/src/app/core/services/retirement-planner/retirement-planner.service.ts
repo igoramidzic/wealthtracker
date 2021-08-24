@@ -27,7 +27,6 @@ export class RetirementPlannerService {
       assumptions: {
         inflation: 0.02,
         lifeExpectancy: faker.datatype.number({ min: 80, max: 110 }),
-        effectiveTaxRate: faker.datatype.float({ min: 0.1, max: 0.3 })
       },
       currentAge: faker.datatype.number({ min: 18, max: 50 }),
       currentInvestmentsBalance: faker.datatype.number({ min: 1000, max: 200000 }),
@@ -46,7 +45,6 @@ export class RetirementPlannerService {
       assumptions: {
         inflation: 0.02,
         lifeExpectancy: 90,
-        effectiveTaxRate: 0.30
       },
       currentAge: 23,
       currentInvestmentsBalance: 50000,
@@ -162,7 +160,7 @@ export class RetirementPlannerService {
       let previousAccumulatedInterest = contributions[i - 1].interest;
       let previousAccumulatedTotal = contributions[i - 1].total - (plan.goal.desiredMonthlySpending * 12 * 1.20);
 
-      let currentInterest = (previousAccumulatedTotal) * (plan.annualReturns - plan.assumptions.inflation);
+      let currentInterest = (previousAccumulatedTotal) * (0.02 - plan.assumptions.inflation);
       let accumulatedInterest = previousAccumulatedInterest + currentInterest;
 
       let accumulatedTotal = previousAccumulatedTotal + currentInterest;
